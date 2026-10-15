@@ -521,14 +521,15 @@ Every chapter folder has a `README.md` index and one Markdown file per section, 
 | Notation | Meaning |
 | --- | --- |
 | `$ command` | Run on the development host as a normal user |
-| `# command` | Run on the target as root |
+| `target$ command` | Run on the target as a normal user |
+| `target# command` | Run on the target as root |
 | `ZynqMP> command` | Run at the U-Boot prompt |
 | `xsdb% command` | Run in XSDB |
 | `<plnx-proj>` | Placeholder: substitute your own value |
 | `0xFFFC0000` | Addresses and register values: hexadecimal, `0x` prefix, no separators |
 | `repo@tag:path` | Source reference, for example `embeddedsw@xilinx_v2024.1:lib/sw_apps/zynqmp_fsbl/src/xfsbl_main.c` |
 
-[CONTRIBUTING.md](CONTRIBUTING.md) has the full writing rules and the section template.
+Examples were captured on the [reference setup](CONTRIBUTING.md#reference-setup): an Ubuntu 22.04 host and the prebuilt ZCU106 2024.1 image running in QEMU. [CONTRIBUTING.md](CONTRIBUTING.md) has the full writing rules and the section template.
 
 ## Primary sources
 

@@ -88,15 +88,32 @@ The sources used, in the citation formats below.
 - Always tag the language of a code block:
 
   | Tag | Use for |
-  |---|---|
+  | --- | --- |
   | `console` | Interactive sessions, with prompts and output |
   | `bash` / `sh` | Scripts that can be copied as a whole |
   | `text` | Logs, boot output, tool output without commands |
   | `c`, `dts`, `make`, `python`, `tcl` | Source code, device tree, Makefiles, scripts, XSDB |
 
-- Use the prompts from the [README conventions](README.md#conventions): `$` (host), `#` (target root), `ZynqMP>` (U-Boot), `xsdb%` (XSDB).
+- Use the prompts from the [README conventions](README.md#conventions): `$` (host), `target$` (target, normal user), `target#` (target, root), `ZynqMP>` (U-Boot), `xsdb%` (XSDB).
 - Trim long output with `...`, but never invent output. If an example was not captured from a real system, say so.
+- You may anonymize host-specific details in output (user names, host names, home directories) as long as nothing else changes.
 - Put a `[!WARNING]` or `[!CAUTION]` in front of anything destructive (`dd`, `flash_erase`, `sf erase`, eFUSE programming).
+
+## Reference setup
+
+Unless a section says otherwise, examples were captured on this setup:
+
+| Role | What it is |
+| --- | --- |
+| Host | Ubuntu 22.04 LTS, PetaLinux 2024.1 installed in `/opt/pkg/petalinux24.1`, Vivado/Vitis 2024.1 |
+| Target | The prebuilt image of the `xilinx-zcu106-2024.1` BSP running in AMD's QEMU (the same images `petalinux-boot qemu --prebuilt 3` uses), with the serial console on a socket and SSH forwarded to host port 2222 |
+
+Some commands need real hardware (a USB-UART cable, a JTAG probe, an SD card) or root on the host (installing packages, exporting NFS shares). When such a command could not be run on the reference setup, mark it like this, and keep the mark until someone has run it:
+
+```markdown
+> [!NOTE]
+> **Not run on the reference setup:** <what, and why>.
+```
 
 ## Facts, sources and verification
 

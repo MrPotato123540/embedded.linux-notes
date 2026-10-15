@@ -1,6 +1,6 @@
 # 02 · Embedded Linux Concepts
 
-**Part I: Foundations** · Work package [WP-02](../ROADMAP.md#wp-02) · Status: 🚧 Planned
+**Part I: Foundations** · Work package [WP-02](../ROADMAP.md#wp-02) · Status: 👀 In review
 
 The building blocks of every embedded Linux system, plus the toolchains, build systems and workflows that produce and deploy them.
 
@@ -10,10 +10,10 @@ The building blocks of every embedded Linux system, plus the toolchains, build s
 
 | # | Section | Status |
 | ---: | --- | --- |
-| 1 | [Anatomy of an Embedded Linux System](01-anatomy-of-an-embedded-linux-system.md) | 🚧 Planned |
-| 2 | [Cross-Compilation and Toolchains](02-cross-compilation-and-toolchains.md) | 🚧 Planned |
-| 3 | [Build Systems Landscape](03-build-systems-landscape.md) | 🚧 Planned |
-| 4 | [Development Workflow](04-development-workflow.md) | 🚧 Planned |
+| 1 | [Anatomy of an Embedded Linux System](01-anatomy-of-an-embedded-linux-system.md) | 👀 In review |
+| 2 | [Cross-Compilation and Toolchains](02-cross-compilation-and-toolchains.md) | 👀 In review |
+| 3 | [Build Systems Landscape](03-build-systems-landscape.md) | 👀 In review |
+| 4 | [Development Workflow](04-development-workflow.md) | 👀 In review |
 
 ---
 

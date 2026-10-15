@@ -35,8 +35,8 @@ The guide is written in **work packages (WPs)**. Each work package delivers one 
 | WP | Chapter | Sections | Phase | Depends on | Status |
 | --- | --- | ---: | ---: | --- | --- |
 | [WP-00](#wp-00) | Repository scaffolding | – | 0 | – | ✅ |
-| [WP-01](#wp-01) | [01 · Linux Fundamentals](01-linux-fundamentals/README.md) | 8 | 1 | – | 🚧 |
-| [WP-02](#wp-02) | [02 · Embedded Linux Concepts](02-embedded-linux-concepts/README.md) | 4 | 1 | [WP-01](#wp-01) | 🚧 |
+| [WP-01](#wp-01) | [01 · Linux Fundamentals](01-linux-fundamentals/README.md) | 8 | 1 | – | 👀 |
+| [WP-02](#wp-02) | [02 · Embedded Linux Concepts](02-embedded-linux-concepts/README.md) | 4 | 1 | [WP-01](#wp-01) | 👀 |
 | [WP-03](#wp-03) | [03 · Zynq UltraScale+ MPSoC Architecture](03-zynqmp-architecture/README.md) | 10 | 1 | – | 🚧 |
 | [WP-04](#wp-04) | [04 · The Yocto Project](04-yocto-project/README.md) | 8 | 1 | [WP-01](#wp-01), [WP-02](#wp-02) | 🚧 |
 | [WP-05](#wp-05) | [05 · PetaLinux 2024.1](05-petalinux/README.md) | 11 | 1 | [WP-04](#wp-04) | 🚧 |
@@ -106,7 +106,7 @@ Writing in reading order means every chapter can link back to finished material 
 
 ### WP-01 · Linux Fundamentals
 
-**Chapter:** [01 · Linux Fundamentals](01-linux-fundamentals/README.md) · **Phase:** 1 · **Depends on:** – · **Status:** 🚧 Planned
+**Chapter:** [01 · Linux Fundamentals](01-linux-fundamentals/README.md) · **Phase:** 1 · **Depends on:** – · **Status:** 👀 In review
 
 What Linux is, the distribution landscape, package managers, the filesystem hierarchy, and the console, SSH and network tools used every day with a target board.
 
@@ -133,11 +133,18 @@ What Linux is, the distribution landscape, package managers, the filesystem hier
 - Every command is run on the Ubuntu 22.04 host and on a PetaLinux 2024.1 target (board or QEMU)
 - SSH examples tested against both Dropbear and OpenSSH images
 
+**Open items** (marked *Not run on the reference setup* in the text)
+
+- USB-UART port identification and `dialout` setup on a physical board ([06 · Serial Console](01-linux-fundamentals/06-serial-console.md))
+- Host package installs with `sudo apt install` ([03 · Package Management](01-linux-fundamentals/03-package-management.md))
+- `nmcli` static address for a direct cable; NFS server setup and an NFS-root boot ([08 · Networking](01-linux-fundamentals/08-networking-for-development.md))
+- VS Code Remote-SSH against the target ([07 · SSH](01-linux-fundamentals/07-ssh.md))
+
 <a id="wp-02"></a>
 
 ### WP-02 · Embedded Linux Concepts
 
-**Chapter:** [02 · Embedded Linux Concepts](02-embedded-linux-concepts/README.md) · **Phase:** 1 · **Depends on:** [WP-01](#wp-01) · **Status:** 🚧 Planned
+**Chapter:** [02 · Embedded Linux Concepts](02-embedded-linux-concepts/README.md) · **Phase:** 1 · **Depends on:** [WP-01](#wp-01) · **Status:** 👀 In review
 
 The building blocks of every embedded Linux system, plus the toolchains, build systems and workflows that produce and deploy them.
 
@@ -157,6 +164,10 @@ The building blocks of every embedded Linux system, plus the toolchains, build s
 **Validation**
 
 - Cross-compile and run a hello-world with the PetaLinux 2024.1 SDK and with a distro cross-compiler
+
+**Open items** (marked *Not run on the reference setup* in the text)
+
+- `git lfs track` for hardware files ([04 · Development Workflow](02-embedded-linux-concepts/04-development-workflow.md))
 
 <a id="wp-03"></a>
 
@@ -900,6 +911,28 @@ Glossary, command cheat sheets, a register quick reference and the full list of 
 **Validation**
 
 - Every link resolves; every register value cross-checked with UG1087; glossary covers every acronym used
+
+## Findings to carry forward
+
+Facts discovered while writing finished work packages that belong in later chapters. Each one was observed on the reference setup.
+
+| Finding | Evidence | Use in |
+| --- | --- | --- |
+| In the ZCU106 2024.1 BSP, TF-A prints to UART1; PMUFW, FSBL, U-Boot and Linux use UART0 | `CONFIG_SUBSYSTEM_TF-A_SERIAL_PSU_UART_1_SELECT=y`; UART1 log shows only `NOTICE: BL31` lines | [WP-06](#wp-06), [WP-10](#wp-10) |
+| BL31 reports `Secure code at 0x60000000`, `Non secure code at 0x8000000` | UART1 log | [WP-06](#wp-06), [WP-10](#wp-10) |
+| `petalinux-boot qemu --prebuilt 3` loads DTB at `0x100000`, `Image` at `0x200000`, ramdisk at `0x4000000`, `boot.scr` at `0x20000000` | QEMU command line printed by `petalinux-boot` | [WP-06](#wp-06), [WP-11](#wp-11), [WP-24](#wp-24) |
+| `petalinux-boot qemu` attaches `rootfs.ext4` as SD card and resizes it to a power of two in place | `boot_qemu.py` (`MakePowerof2`), `Image resized.` message | [WP-24](#wp-24) |
+| The prebuilt BSP image boots a 5.4 MB `petalinux-initramfs-image`, which switches to `rootfs.ext4` on `/dev/mmcblk0` | boot log, `/proc/cmdline` (`root=/dev/ram0`), `mount` | [WP-15](#wp-15) |
+| Sending `system_reset` on the A53 QEMU monitor hangs the multi-arch (A53 + PMU) QEMU; a guest `reboot` works | QEMU at 300 % CPU, no console output | [WP-24](#wp-24) |
+| UART1 is `ttyPS2` because alias `serial1` is `/dcc` | decompiled `system.dtb`, `dmesg` | [WP-12](#wp-12), [WP-22](#wp-22) |
+| BusyBox `inetd` serves telnet (23) and FTP (21); `/bin/busybox` is setuid root; the package feed is HTTP with `gpgcheck=0` and unsigned RPMs | `netstat -tln`, `find -perm -4000`, `/etc/yum.repos.d/`, `rpm -qi` | [WP-27](#wp-27) |
+| `/var/log` and `/var/tmp` are on tmpfs (`/var/volatile`); the journal is lost at reboot | `ls -l /var`, `mount` | [WP-15](#wp-15), [WP-23](#wp-23) |
+| `KillUserProcesses=yes` (compiled-in default): processes started from SSH sessions die at logout | `logind.conf`, test with `nohup` and `systemd-run` | [WP-15](#wp-15), [WP-16](#wp-16) |
+| Switching networkd from a static file back to DHCP with `networkctl reconfigure` left no default route; restarting `systemd-networkd` fixed it | `ip route` before and after | [WP-22](#wp-22) |
+| Machine-specific feed repositories (`zcu106_zynqmp`, `xilinx_zcu106`) return 404; `petalinux.xilinx.com` redirects to `edf.amd.com` | `dnf install` output | [WP-05](#wp-05) |
+| The project's `components/yocto/environment-setup-*` points to `components/yocto/tmp/sysroots/...`, which does not exist in the BSP as shipped | `ls components/yocto` | [WP-04](#wp-04), [WP-16](#wp-16) |
+| The project's `project-spec/configs` were changed after the prebuilt images were made (e.g. `dnf` is in the image but not selected in `rootfs_config`); do not infer the prebuilt image's configuration from the project files | `rootfs.manifest` vs. `rootfs_config` | [WP-05](#wp-05) |
+| Buildroot 2025.02.x ZynqMP configurations boot through U-Boot SPL instead of the FSBL | `configs/zynqmp_zcu106_defconfig` | [WP-08](#wp-08) |
 
 ## Coverage map
 
