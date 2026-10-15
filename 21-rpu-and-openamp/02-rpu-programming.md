@@ -1,15 +1,28 @@
 # Programming the RPU
 
-> [!NOTE]
-> 🚧 **Planned.** This section is written in work package [WP-21](../ROADMAP.md#wp-21). The outline below is the agreed scope and will be replaced by the full text.
+> **Applies to:** PetaLinux 2024.1 · Zynq UltraScale+ MPSoC
 
 **[21 · RPU and OpenAMP](README.md)** · Part X: Heterogeneous Multiprocessing
 
-## Planned content
+## Split and lockstep
 
-- Lockstep vs. split mode; placing code in TCM and DDR
-- Bare-metal and FreeRTOS applications in Vitis
-- Booting the RPU from the FSBL vs. from Linux
+In split mode, the R5 cores can run separate software. In lockstep mode, they work together for fault detection rather than providing two independent application instances. Firmware, memory layout and platform configuration must match the selected mode.
+
+**Tightly Coupled Memory (TCM)** provides predictable local access. DDR offers larger capacity but shares the system path. Link addresses and processor-visible addresses must agree with the chosen memory view.
+
+## Build and boot
+
+Vitis can build bare-metal or FreeRTOS applications for the selected RPU platform. Preserve the linker script, hardware export and libraries with the firmware.
+
+The FSBL can load RPU firmware during boot, or Linux remoteproc can manage a supported runtime lifecycle. Do not combine both ownership models without a documented attach/recovery design. Loading the same processor again can destroy a running control task.
+
+> [!NOTE]
+> **Not run on the reference setup:** RPU split/lockstep hardware execution and timing tests.
+
+## References
+
+- UG1085 (v2.5), RPU configuration and TCM
+- AMD UG1400 (2024.1), standalone and FreeRTOS application flows
 
 ---
 

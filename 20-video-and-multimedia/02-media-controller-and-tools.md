@@ -1,17 +1,28 @@
 # Media Controller and Tools: media-ctl, v4l2-ctl, yavta
 
-> [!NOTE]
-> 🚧 **Planned.** This section is written in work package [WP-20](../ROADMAP.md#wp-20). The outline below is the agreed scope and will be replaced by the full text.
+> **Applies to:** PetaLinux 2024.1 · Zynq UltraScale+ MPSoC
 
 **[20 · Video and Multimedia](README.md)** · Part IX: Graphics and Multimedia
 
-## Planned content
+## Inspect before streaming
 
-- Media graph topology: entities, pads and links
-- `media-ctl`: printing the topology, setting formats and links
-- `v4l2-ctl`: listing devices and formats, setting formats, streaming
-- `yavta` and `v4l2-compliance`
-- Worked example: a MIPI CSI-2 camera pipeline
+`media-ctl` shows entities, pads and links. `v4l2-ctl` inspects video-node capabilities, formats and controls. `yavta` helps exercise capture, while `v4l2-compliance` checks interface behavior. The inspected PetaLinux v4lutils packagegroup includes v4l-utils and yavta.
+
+## Camera pipeline walkthrough
+
+For a MIPI CSI-2 camera design, trace sensor → receiver → processing blocks → capture DMA. First confirm sensor power, clock and control-bus communication. Then check endpoint wiring, lane configuration and media links.
+
+Set compatible pad formats across the path before requesting capture buffers. Start with a supported low-complexity mode. Verify frame size, sequence numbers and timestamps before adding display or encoding.
+
+Entity names and pad indices come from the actual graph. A command copied from another camera design can configure the wrong pad or fail even when the hardware is healthy.
+
+> [!NOTE]
+> **Not run on the reference setup:** a physical MIPI camera session. No invented entity names or successful capture output are supplied.
+
+## References
+
+- Linux 6.6 media-controller userspace API
+- Inspected `packagegroup-petalinux-v4lutils.bb`
 
 ---
 

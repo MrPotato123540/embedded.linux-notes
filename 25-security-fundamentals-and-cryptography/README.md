@@ -1,19 +1,21 @@
 # 25 · Security Fundamentals and Cryptography
 
-**Part XIV: Security** · Work package [WP-25](../ROADMAP.md#wp-25) · Status: 🚧 Planned
+**Part XIV: Security** · Work package [WP-25](../ROADMAP.md#wp-25) · Status: 👀 In review
 
 Security principles, threat modeling and the cryptography needed to design secure embedded products. No prior security experience is assumed.
 
 **Prerequisites:** none
 
+All sections contain written material. Source and artifact checks are recorded in the text. Target-specific tests marked **Not run on the reference setup** remain open.
+
 ## Sections
 
 | # | Section | Status |
 | ---: | --- | --- |
-| 1 | [Security Principles and Threat Modeling](01-security-principles-and-threat-modeling.md) | 🚧 Planned |
-| 2 | [Cryptography Primer](02-cryptography-primer.md) | 🚧 Planned |
-| 3 | [PKI and Certificates](03-pki-and-certificates.md) | 🚧 Planned |
-| 4 | [Key Management](04-key-management.md) | 🚧 Planned |
+| 1 | [Security Principles and Threat Modeling](01-security-principles-and-threat-modeling.md) | 👀 In review |
+| 2 | [Cryptography Primer](02-cryptography-primer.md) | 👀 In review |
+| 3 | [PKI and Certificates](03-pki-and-certificates.md) | 👀 In review |
+| 4 | [Key Management](04-key-management.md) | 👀 In review |
 
 ---
 

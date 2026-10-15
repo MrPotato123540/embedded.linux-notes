@@ -1,16 +1,30 @@
 # DFX: Dynamic Function eXchange
 
-> [!NOTE]
-> 🚧 **Planned.** This section is written in work package [WP-17](../ROADMAP.md#wp-17). The outline below is the agreed scope and will be replaced by the full text.
+> **Applies to:** PetaLinux 2024.1 · Zynq UltraScale+ MPSoC
 
 **[17 · PL Integration, FPGA Manager and DFX](README.md)** · Part VIII: Programmable Logic and Acceleration
 
-## Planned content
+## Static and reconfigurable logic
 
-- Partial reconfiguration concepts: static region, reconfigurable partitions, reconfigurable modules
-- Decoupling, reset and clocking rules
-- Vivado DFX flow overview and its outputs
-- Loading partial bitstreams and overlays from Linux
+**Dynamic Function eXchange (DFX)** changes a reconfigurable region while a compatible static design remains loaded. A reconfigurable module must match the partition interface and implementation constraints of that static design.
+
+The software sequence must prevent transactions crossing an unstable boundary. Stop clients, drain transfers, isolate or decouple the region, apply required resets and load the matching partial bitstream. Restore communication only after the hardware and software state are ready.
+
+## Design outputs
+
+Vivado's DFX flow produces related static and partial artifacts. Package their compatibility information with overlays and application metadata. Two partial bitstreams for different static builds are not interchangeable even if they use the same region name.
+
+## Failure testing
+
+Test load failure, interrupted application shutdown and repeated module changes. Recovery must leave the system in a known state rather than exposing half-configured devices. Review clocks and reset behavior across each transition.
+
+> [!NOTE]
+> **Not run on the reference setup:** physical partial reconfiguration and interruption tests.
+
+## References
+
+- AMD UG909, Dynamic Function eXchange, release matching Vivado 2024.1
+- Linux FPGA-region/bridge documentation
 
 ---
 

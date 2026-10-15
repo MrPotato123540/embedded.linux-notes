@@ -1,15 +1,32 @@
 # BSP Packaging and Reproducible Builds
 
-> [!NOTE]
-> 🚧 **Planned.** This section is written in work package [WP-05](../ROADMAP.md#wp-05). The outline below is the agreed scope and will be replaced by the full text.
+> **Applies to:** PetaLinux 2024.1 · Zynq UltraScale+ MPSoC
 
 **[05 · PetaLinux 2024.1](README.md)** · Part III: Build Systems
 
-## Planned content
+## What a BSP preserves
 
-- `petalinux-package --bsp` and sharing projects
-- Pinning versions, sstate mirrors and CI-friendly builds
-- Building inside containers
+A **Board Support Package (BSP)** packages a project for reuse. It can include configuration, hardware assets and selected prebuilt files. It is useful for sharing a starting point, but it does not automatically capture every remote source or host dependency.
+
+A reproducible release needs the tool version, hardware revision, layer revisions, source revisions, patches, configuration and package manifest. Record checksums for published images. Pin moving Git branches to commits in release records.
+
+## Cache and CI policy
+
+A continuous integration build should start from maintained inputs. Shared downloads and shared state can reduce time, but a cache-only success can hide missing sources. Periodically test a clean build against controlled mirrors.
+
+A container can fix many host tools, but it does not remove all host dependencies. Filesystem behavior, user permissions, available memory and kernel features still matter. Keep build output owned by the intended user, and do not run the normal build as root.
+
+## Release test
+
+Recreate the project in a separate directory, build it, compare manifests and boot the output. Explain any binary differences before calling the build reproducible. Timestamps, build paths and uncontrolled source revisions can all affect output.
+
+> [!NOTE]
+> **Not run on the reference setup:** BSP export/reimport and a second clean build. Packaging a BSP alone is not evidence of reproducibility.
+
+## References
+
+- AMD UG1144 (2024.1), BSP packaging and build mirrors
+- Yocto 4.1.4 [reproducible builds](https://docs.yoctoproject.org/4.1.4/test-manual/reproducible-builds.html)
 
 ---
 

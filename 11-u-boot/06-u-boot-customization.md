@@ -1,17 +1,28 @@
 # Customizing U-Boot
 
-> [!NOTE]
-> 🚧 **Planned.** This section is written in work package [WP-11](../ROADMAP.md#wp-11). The outline below is the agreed scope and will be replaced by the full text.
+> **Applies to:** PetaLinux 2024.1 · Zynq UltraScale+ MPSoC
 
 **[11 · U-Boot](README.md)** · Part IV: Boot
 
-## Planned content
+## Maintain configuration and code separately
 
-- Configuration: `petalinux-config -c u-boot`, defconfig, config fragments
-- `platform-top.h` and compile-time defaults
-- The U-Boot device tree and its `system-user.dtsi`
-- Patching `board/xilinx/zynqmp`; adding a custom command
-- The `devtool modify u-boot-xlnx` workflow
+Use the PetaLinux U-Boot configuration flow for supported menu options. Preserve the resulting fragments in `meta-user`. A defconfig provides the base; later fragments and recipe settings determine the final configuration.
+
+Older board flows may use headers such as `platform-top.h` for defaults. Do not assume every option still belongs there. Check whether the pinned release uses a Kconfig symbol, environment source or board header.
+
+## Source changes
+
+Put patches to `board/xilinx/zynqmp` or command code in a recipe append. A custom command needs argument validation, clear failure returns and configuration integration. Avoid turning a diagnostic command into an unrestricted production interface accidentally.
+
+U-Boot's control tree and the Linux handoff tree can differ. Verify both when changing pins, storage or early console settings. A working Linux driver does not prove that U-Boot supports the same hardware setup.
+
+> [!NOTE]
+> **Not run on the reference setup:** a custom U-Boot rebuild and cold-boot test. Use the [devtool workflow](../04-yocto-project/07-devtool-workflow.md) to preserve changes before image integration.
+
+## References
+
+- `u-boot-xlnx@xilinx-v2024.1:board/xilinx/zynqmp/`
+- AMD UG1144 (2024.1), U-Boot configuration
 
 ---
 

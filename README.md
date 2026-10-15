@@ -1,18 +1,18 @@
 # Zynq UltraScale+ MPSoC Embedded Linux Guide
 
-An advanced, source-verified guide to building, booting, customizing and securing embedded Linux on AMD (formerly Xilinx) **Zynq UltraScale+ MPSoC** devices, anchored to **PetaLinux 2024.1** and the matching AMD open-source repositories.
+A source-referenced engineering guide to building, booting, customizing and securing embedded Linux on AMD (formerly Xilinx) **Zynq UltraScale+ MPSoC** devices, anchored to **PetaLinux 2024.1** and the matching AMD open-source repositories.
 
 > [!NOTE]
-> The guide is written in work packages. The [roadmap](ROADMAP.md) shows what is finished and what comes next. Sections marked 🚧 contain only their agreed outline so far.
+> All 180 sections now contain written material. The [roadmap](ROADMAP.md) separates writing progress from remaining validation. Chapters remain in review where builds or hardware tests are outstanding. English aims at B1–B2 level, with technical terms explained in context.
 
 ## Why this guide
 
 ZynqMP documentation is usually one of two things: vendor reference manuals that are complete but spread over dozens of user guides, or tutorials that are easy to follow but shallow. This guide sits between them. It explains **how things actually work**, down to load addresses, register fields and source files, and shows **how to change them** in a real PetaLinux 2024.1 project.
 
 - **Pinned to a release.** Everything targets the 2024.1 tools and the matching source tags. Differences between releases are called out explicitly.
-- **Checked against sources.** Every address, register and default value cites the AMD document or the source file (at its 2024.1 tag) it comes from.
-- **Real artifacts.** Examples come from real 2024.1 BSP projects (ZCU104, ZCU106). None are invented.
-- **Hands-on.** Each concept comes with commands to run on the host, in U-Boot, on the target or in XSDB.
+- **Source references.** Hardware values and release behavior point to AMD documents, pinned source trees or inspected BSP artifacts. Validation limits are stated explicitly.
+- **Real artifacts.** Recorded output comes from actual BSP files and captured sessions. Teaching examples are labeled and are not presented as board measurements.
+- **Practical guidance.** Sections explain inspection, configuration and failure diagnosis. Commands recorded as executed are distinguished from workflows that still need target validation.
 
 ## Who it is for
 

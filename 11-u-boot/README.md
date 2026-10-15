@@ -1,21 +1,23 @@
 # 11 · U-Boot
 
-**Part IV: Boot** · Work package [WP-11](../ROADMAP.md#wp-11) · Status: 🚧 Planned
+**Part IV: Boot** · Work package [WP-11](../ROADMAP.md#wp-11) · Status: 👀 In review
 
 U-Boot on ZynqMP: essential commands, environment, boot.scr and uEnv.txt, FIT images, exactly how it loads and starts Linux, and how to customize it.
 
 **Prerequisites:** [06 · Boot Sequence](../06-boot-sequence/README.md)
 
+All sections contain written material. Source and artifact checks are recorded in the text. Target-specific tests marked **Not run on the reference setup** remain open.
+
 ## Sections
 
 | # | Section | Status |
 | ---: | --- | --- |
-| 1 | [U-Boot Overview](01-u-boot-overview.md) | 🚧 Planned |
-| 2 | [Essential U-Boot Commands](02-essential-commands.md) | 🚧 Planned |
-| 3 | [Environment, boot.scr and uEnv.txt](03-environment-and-boot-scripts.md) | 🚧 Planned |
-| 4 | [FIT Images and image.ub](04-fit-images.md) | 🚧 Planned |
-| 5 | [How U-Boot Boots the Linux Kernel](05-how-u-boot-boots-linux.md) | 🚧 Planned |
-| 6 | [Customizing U-Boot](06-u-boot-customization.md) | 🚧 Planned |
+| 1 | [U-Boot Overview](01-u-boot-overview.md) | 👀 In review |
+| 2 | [Essential U-Boot Commands](02-essential-commands.md) | 👀 In review |
+| 3 | [Environment, boot.scr and uEnv.txt](03-environment-and-boot-scripts.md) | 👀 In review |
+| 4 | [FIT Images and image.ub](04-fit-images.md) | 👀 In review |
+| 5 | [How U-Boot Boots the Linux Kernel](05-how-u-boot-boots-linux.md) | 👀 In review |
+| 6 | [Customizing U-Boot](06-u-boot-customization.md) | 👀 In review |
 
 ---
 

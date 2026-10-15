@@ -6,8 +6,8 @@
 
 ## In short
 
-- Strictly speaking, **Linux is only the kernel**. What runs on a board is an **operating system**: the kernel plus a C library and user-space programs. A **distribution** is a curated, versioned and maintained collection of all of that.
-- The kernel follows a fixed rhythm: a mainline release roughly every 9 to 10 weeks, short-lived stable updates, and a few **longterm (LTS)** branches maintained for years. Vendor kernels such as AMD's `linux-xlnx` are built on LTS branches.
+- Strictly speaking, **Linux is only the kernel**. What runs on a board is an **operating system**: the kernel plus a C library and user-space programs. A **distribution** is a maintained collection of these components with a defined release version.
+- Kernel development follows a release process: a mainline release roughly every 9 to 10 weeks, short-lived stable updates, and a few **longterm (LTS)** branches maintained for years. Vendor kernels such as AMD's `linux-xlnx` are built on LTS branches.
 - Licenses matter from the first prototype. The kernel is GPL-2.0-only, and shipping a product means you must be able to provide the corresponding source code of every GPL component in it.
 - A ZynqMP design usually runs Linux, an RTOS and bare-metal code **at the same time**, on different processors. Choosing what runs where is a design decision.
 
@@ -32,7 +32,7 @@ flowchart TB
     K --> HW
 ```
 
-- **Kernel.** The only program that runs in the privileged CPU mode (EL1 on Arm64). It schedules processes, manages memory, implements filesystems and the network stack, and drives the hardware. It has no shell, no login prompt and no `ls`. Programs reach it only through **system calls**.
+- **Kernel.** The main operating-system component running with kernel privileges (normally Non-secure EL1 on this Arm64 platform). Drivers and loadable modules execute with those privileges too. It schedules processes, manages memory, implements filesystems and the network stack, and drives the hardware. It has no shell, no login prompt and no `ls`. Programs request kernel services through **system calls**. Interrupts and exceptions also enter kernel handlers.
 - **Operating system.** The kernel plus the user space that makes it usable: a C library, an init system, a shell and utilities. On desktop systems most of these come from the GNU project, which is why the whole system is sometimes called *GNU/Linux*. Embedded systems often replace the GNU utilities with **BusyBox** ([chapter 15](../15-root-filesystem-and-init/07-busybox.md)).
 - **Distribution.** A project or company that chooses component versions, builds them, configures them to work together, packages them and keeps shipping security fixes for years. Debian, Ubuntu and Fedora are distributions. So is **PetaLinux**: a distribution that AMD builds with the Yocto Project.
 
@@ -133,7 +133,7 @@ What this means in practice:
 - **GPL (copyleft).** If you distribute a device that contains GPL software, you must also provide the corresponding source code of that software, including your modifications, under the same license. This covers the kernel, BusyBox and bash in the list above.
 - **The kernel's user-space boundary.** The kernel's license (`COPYING` in the kernel source) includes a note saying that programs which only use the kernel through system calls are **not** derived works. Your proprietary application can run on Linux. A kernel **module**, however, links against the kernel, and many kernel APIs are exported only to GPL-compatible modules (`EXPORT_SYMBOL_GPL`).
 - **LGPL.** Libraries such as glibc and libgpiod can be used by proprietary programs, as long as the user can replace the library (dynamic linking is the usual way to satisfy this).
-- **Permissive licenses** (BSD, MIT, ISC), such as OpenSSH's, only require keeping copyright notices.
+- **Permissive licenses** (BSD, MIT, ISC), such as those used by OpenSSH, generally allow redistribution with fewer conditions than copyleft licenses. Preserve the required copyright notices, license terms and disclaimers; check each component's actual license.
 - **GPLv3** (bash here) adds requirements around installation information for consumer devices. Some companies exclude GPLv3 components from products for that reason. Yocto can enforce such a policy with `INCOMPATIBLE_LICENSE`.
 
 > [!IMPORTANT]

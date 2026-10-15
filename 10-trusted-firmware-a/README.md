@@ -1,19 +1,21 @@
 # 10 · Trusted Firmware-A (BL31)
 
-**Part IV: Boot** · Work package [WP-10](../ROADMAP.md#wp-10) · Status: 🚧 Planned
+**Part IV: Boot** · Work package [WP-10](../ROADMAP.md#wp-10) · Status: 👀 In review
 
 TF-A (formerly ATF) on ZynqMP: the EL3 runtime that provides PSCI, forwards platform management calls and hosts secure services.
 
 **Prerequisites:** [03 · Zynq UltraScale+ MPSoC Architecture](../03-zynqmp-architecture/README.md) · [06 · Boot Sequence](../06-boot-sequence/README.md)
 
+All sections contain written material. Source and artifact checks are recorded in the text. Target-specific tests marked **Not run on the reference setup** remain open.
+
 ## Sections
 
 | # | Section | Status |
 | ---: | --- | --- |
-| 1 | [TF-A Overview](01-tfa-overview.md) | 🚧 Planned |
-| 2 | [BL31 on ZynqMP](02-bl31-on-zynqmp.md) | 🚧 Planned |
-| 3 | [Building and Customizing TF-A](03-tfa-customization.md) | 🚧 Planned |
-| 4 | [BL32 and OP-TEE (Overview)](04-op-tee-overview.md) | 🚧 Planned |
+| 1 | [TF-A Overview](01-tfa-overview.md) | 👀 In review |
+| 2 | [BL31 on ZynqMP](02-bl31-on-zynqmp.md) | 👀 In review |
+| 3 | [Building and Customizing TF-A](03-tfa-customization.md) | 👀 In review |
+| 4 | [BL32 and OP-TEE (Overview)](04-op-tee-overview.md) | 👀 In review |
 
 ---
 

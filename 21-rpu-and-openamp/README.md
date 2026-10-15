@@ -1,21 +1,23 @@
 # 21 · RPU and OpenAMP
 
-**Part X: Heterogeneous Multiprocessing** · Work package [WP-21](../ROADMAP.md#wp-21) · Status: 🚧 Planned
+**Part X: Heterogeneous Multiprocessing** · Work package [WP-21](../ROADMAP.md#wp-21) · Status: 👀 In review
 
 Asymmetric multiprocessing with the Cortex-R5F cluster: firmware on the RPU, remoteproc, RPMsg, libmetal, IPI and shared memory.
 
 **Prerequisites:** [03 · Zynq UltraScale+ MPSoC Architecture](../03-zynqmp-architecture/README.md) · [12 · Device Tree](../12-device-tree/README.md)
 
+All sections contain written material. Source and artifact checks are recorded in the text. Target-specific tests marked **Not run on the reference setup** remain open.
+
 ## Sections
 
 | # | Section | Status |
 | ---: | --- | --- |
-| 1 | [AMP vs. SMP Concepts](01-amp-concepts.md) | 🚧 Planned |
-| 2 | [Programming the RPU](02-rpu-programming.md) | 🚧 Planned |
-| 3 | [remoteproc and RPMsg](03-remoteproc-and-rpmsg.md) | 🚧 Planned |
-| 4 | [OpenAMP in PetaLinux](04-openamp-in-petalinux.md) | 🚧 Planned |
-| 5 | [IPI and Shared Memory Patterns](05-ipi-and-shared-memory.md) | 🚧 Planned |
-| 6 | [Xen Hypervisor (Overview)](06-xen-hypervisor.md) | 🚧 Planned |
+| 1 | [AMP vs. SMP Concepts](01-amp-concepts.md) | 👀 In review |
+| 2 | [Programming the RPU](02-rpu-programming.md) | 👀 In review |
+| 3 | [remoteproc and RPMsg](03-remoteproc-and-rpmsg.md) | 👀 In review |
+| 4 | [OpenAMP in PetaLinux](04-openamp-in-petalinux.md) | 👀 In review |
+| 5 | [IPI and Shared Memory Patterns](05-ipi-and-shared-memory.md) | 👀 In review |
+| 6 | [Xen Hypervisor (Overview)](06-xen-hypervisor.md) | 👀 In review |
 
 ---
 

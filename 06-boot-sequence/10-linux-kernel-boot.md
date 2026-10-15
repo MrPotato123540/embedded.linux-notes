@@ -1,16 +1,29 @@
 # Linux Kernel Boot
 
-> [!NOTE]
-> 🚧 **Planned.** This section is written in work package [WP-06](../ROADMAP.md#wp-06). The outline below is the agreed scope and will be replaced by the full text.
+> **Applies to:** PetaLinux 2024.1 · Zynq UltraScale+ MPSoC
 
 **[06 · Boot Sequence](README.md)** · Part IV: Boot
 
-## Planned content
+## Entry contract
 
-- arm64 boot protocol requirements: MMU off, `x0` = DTB address, entry at EL2
-- Early boot: `head.S`, `start_kernel`, `earlycon`
-- Device tree unflattening, initcalls, driver probing, deferred probe
-- Mounting the root filesystem (initramfs, initrd, block device, NFS) and executing init
+The Arm64 boot protocol defines the state expected at the kernel entry point. The device-tree address is passed in `x0`; the MMU must be off, and cache and interrupt conditions must meet the protocol. Entry can be Non-secure EL1 or EL2. EL2 is recommended when available; it is not the only legal entry level.
+
+Early assembly in `arch/arm64/kernel/head.S` prepares the execution environment before C initialization reaches `start_kernel`. Early console support can make failures visible before the normal serial driver is ready.
+
+## Drivers and root filesystem
+
+Linux reads the device tree and initializes subsystems through initcalls. Drivers probe devices when their dependencies are available. Deferred probing allows a consumer to wait for a clock, regulator or another provider; it is not always a driver bug.
+
+Root startup depends on the selected model. An initramfs is unpacked into an early root filesystem. A block-device root requires its controller, filesystem and storage path. Network root requires working networking early enough. Drivers needed before the final root is mounted must be available at that point, either built in or in the early userspace image.
+
+## Debugging
+
+At `Starting kernel ...`, check the entry contract, DTB placement and console first. At a root-mount panic, check the root argument and early driver availability. These are different stages even if both look like a failed Linux boot.
+
+## References
+
+- Linux 6.6 [AArch64 boot protocol](https://docs.kernel.org/6.6/arch/arm64/booting.html)
+- `linux-xlnx@xilinx-v2024.1:arch/arm64/kernel/head.S`, `init/main.c`
 
 ---
 

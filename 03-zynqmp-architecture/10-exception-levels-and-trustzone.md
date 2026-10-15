@@ -118,7 +118,7 @@ When you change the boot arrangement, review the parts together:
 3. The device-tree call method must match the available firmware or hypervisor interface.
 4. Memory used by resident firmware must stay available to that firmware after Linux starts.
 
-For implementation details, continue with [the boot sequence](../06-boot-sequence/README.md), [TF-A](../10-trusted-firmware-a/README.md) and [TrustZone and OP-TEE](../26-zynqmp-hardware-security-and-secure-boot/08-trustzone-and-op-tee.md). These later chapters are still planned.
+For implementation details, continue with [the boot sequence](../06-boot-sequence/README.md), [TF-A](../10-trusted-firmware-a/README.md) and [TrustZone and OP-TEE](../26-zynqmp-hardware-security-and-secure-boot/08-trustzone-and-op-tee.md). These chapters now contain written material; their hardware validation notes remain open.
 
 ## Pitfalls and debugging
 

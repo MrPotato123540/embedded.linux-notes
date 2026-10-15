@@ -1,14 +1,28 @@
 # TrustZone and OP-TEE
 
-> [!NOTE]
-> 🚧 **Planned.** This section is written in work package [WP-26](../ROADMAP.md#wp-26). The outline below is the agreed scope and will be replaced by the full text.
+> **Applies to:** PetaLinux 2024.1 · Zynq UltraScale+ MPSoC
 
 **[26 · ZynqMP Hardware Security and Secure Boot](README.md)** · Part XIV: Security
 
-## Planned content
+## Trusted applications
 
-- OP-TEE on ZynqMP; trusted applications
-- Secure storage and key handling
+OP-TEE places a small trusted OS and selected applications in the Secure world. A Linux client asks for a defined service. The trusted application should validate command identifiers, buffer lengths and data before acting.
+
+Keep the trusted code small. Moving a large parser into the Secure world increases the code that must be trusted. Avoid services that simply expose arbitrary secure memory or unrestricted hardware operations.
+
+## Memory and storage
+
+Secure memory requires hardware isolation and correct reservations. Shared memory is intentionally visible across the boundary and must be treated as untrusted input. Do not assume a caller leaves shared data unchanged during processing.
+
+Secure storage depends on the chosen backend and key derivation. Replay/rollback resistance is a separate property; encrypted files on a normal filesystem do not automatically provide it. Device-bound secrets also need a lifecycle for replacement and factory reset.
+
+> [!NOTE]
+> **Not run on the reference setup:** trusted-application execution, secure storage and physical isolation tests.
+
+## References
+
+- OP-TEE core and secure-storage documentation
+- [Exception levels and TrustZone](../03-zynqmp-architecture/10-exception-levels-and-trustzone.md)
 
 ---
 

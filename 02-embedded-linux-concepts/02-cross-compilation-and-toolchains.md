@@ -165,7 +165,9 @@ $ stat -c "%s %n" hello hello-static hello-x86
 16064 hello-x86
 ```
 
-A static binary contains its C library, needs no loader and runs anywhere the CPU and kernel fit, here even through binfmt without `-L`. The price is size (708 KB instead of 75 KB), no shared security updates of the library, and license obligations: statically linking glibc (LGPL) requires you to let users relink your program. Static linking is useful for rescue tools and tiny initramfs utilities, not as a default.
+A static binary includes the libraries linked into it and usually needs no separate ELF loader. In this test it runs through binfmt without `-L`. It still depends on a compatible CPU, kernel interfaces and any runtime data or dynamically loaded components it uses.
+
+The example grows from 75 KB to 708 KB. Library security fixes require rebuilding the binary. Static linking also needs a license review, including the applicable LGPL relinking requirements. It can be useful for rescue tools and small initramfs utilities.
 
 Why is the dynamic Arm64 binary 75 KB when the x86-64 one is 16 KB? Not because of the code, which is tiny in both. The Arm64 linker aligns loadable segments to 64 KiB, the x86-64 one to 4 KiB, and the gap is padding in the file:
 

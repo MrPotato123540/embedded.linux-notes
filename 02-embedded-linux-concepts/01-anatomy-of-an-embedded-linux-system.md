@@ -69,7 +69,7 @@ the_ROM_image:
 }
 ```
 
-Five partitions: the FSBL, the PMU firmware, TF-A, the device tree (for U-Boot to pass on to Linux) and U-Boot. The kernel and root filesystem stay separate files, so they can be replaced without rebuilding the boot image. This BSP does not put the bitstream into `BOOT.BIN`; it loads PL designs later from Linux through the FPGA manager ([chapter 17](../17-pl-integration-and-dfx/03-fpga-manager.md)). [Chapter 07](../07-boot-images-and-bootgen/01-bif-file-format.md) dissects the BIF syntax.
+Five input files: the FSBL, PMU firmware, TF-A, device tree and U-Boot. Bootgen 2024.1 reports four image headers in this file. The `pmufw_image` input is handled through the boot-header loading format, so input-file count and image-header count differ. The kernel and root filesystem stay separate files, so they can be replaced without rebuilding the boot image. This BSP does not put the bitstream into `BOOT.BIN`; it loads PL designs later from Linux through the FPGA manager ([chapter 17](../17-pl-integration-and-dfx/03-fpga-manager.md)). [Chapter 07](../07-boot-images-and-bootgen/01-bif-file-format.md) explains the BIF syntax.
 
 The sizes tell a story too:
 

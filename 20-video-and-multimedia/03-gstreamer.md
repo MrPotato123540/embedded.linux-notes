@@ -1,18 +1,30 @@
 # GStreamer
 
-> [!NOTE]
-> 🚧 **Planned.** This section is written in work package [WP-20](../ROADMAP.md#wp-20). The outline below is the agreed scope and will be replaced by the full text.
+> **Applies to:** PetaLinux 2024.1 · Zynq UltraScale+ MPSoC
 
 **[20 · Video and Multimedia](README.md)** · Part IX: Graphics and Multimedia
 
-## Planned content
+## Pipeline model
 
-- Architecture: elements, pads, caps, bins, pipelines, the bus
-- `gst-launch-1.0` and `gst-inspect-1.0`
-- Plugin sets (base, good, bad, ugly) and AMD-specific plugins
-- Common pipelines: capture, display, encode, stream over RTP/UDP
-- Debugging with `GST_DEBUG` and pipeline graphs; latency and zero-copy (dmabuf)
-- `appsrc`/`appsink` from C and Python
+GStreamer connects elements through pads. **Caps** describe negotiated media formats. A pipeline controls state and timing; its bus reports errors, state changes and end-of-stream events. Applications must process those messages rather than waiting forever after a failure.
+
+A capture-to-network design typically connects capture, conversion if required, encoder, RTP payloader and UDP sink. A display path uses a compatible sink instead. Every link needs compatible formats and memory types.
+
+## Tools and plugins
+
+`gst-inspect-1.0` describes installed elements and properties. `gst-launch-1.0` is useful for experiments. Plugin collections called base, good, bad and ugly describe project groupings; the names are not a complete security or license assessment.
+
+Use `GST_DEBUG` and pipeline graphs to find negotiation and state failures. Add queues deliberately: they can isolate threads but also increase latency and memory use. DMABUF can avoid copies only when adjacent elements support compatible buffers.
+
+`appsrc` and `appsink` connect application data to a pipeline. Handle timestamps, backpressure and buffer lifetime in C or Python.
+
+> [!NOTE]
+> **Not run on the reference setup:** hardware capture/encode pipelines and latency measurement.
+
+## References
+
+- GStreamer Application Development Manual, pipeline, caps and bus sections
+- Reference PetaLinux GStreamer packagegroups
 
 ---
 

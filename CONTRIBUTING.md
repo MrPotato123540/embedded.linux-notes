@@ -170,7 +170,7 @@ The guide uses GitHub alert syntax:
 
 ## Workflow
 
-1. Work on one work package at a time, on a branch named after it, for example `wp-06-boot-sequence`.
+1. Work on one work package at a time, directly on `main`, as requested by the repository owner. Do not create work-package branches.
 2. Use commit messages of the form `WP-06: add boot modes section`.
 3. When a section is finished, replace its stub, update the status in the chapter `README.md` and update [ROADMAP.md](ROADMAP.md).
 4. Before closing a work package, run a link checker (for example `lychee` or `markdown-link-check`) and resolve every *Unverified* warning.

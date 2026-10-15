@@ -1,15 +1,29 @@
 # Users, Passwords and Login
 
-> [!NOTE]
-> 🚧 **Planned.** This section is written in work package [WP-15](../ROADMAP.md#wp-15). The outline below is the agreed scope and will be replaced by the full text.
+> **Applies to:** PetaLinux 2024.1 · Zynq UltraScale+ MPSoC
 
 **[15 · Root Filesystem and Init](README.md)** · Part VII: Root Filesystem and User Space
 
-## Planned content
+## Build-time identity
 
-- The PetaLinux 2024.1 default user and password policy
-- Adding users and groups at build time (`extrausers`)
-- Auto-login for development; root access policy
+Users, groups and login policy are part of the image. Yocto's `useradd` support suits package-owned service users; `extrausers` can apply image-wide account changes. Use stable ownership rules when persistent files survive upgrades.
+
+The reference captures use the `petalinux` account, and the local QEMU scripts set a laboratory password. That password is a test fixture, not a production default or a recommendation. Check the release's first-login behavior on an unmodified image before documenting a factory procedure.
+
+## Product policy
+
+Create unique credentials or provision authorized keys through a controlled process. Keep service users separate from interactive administrators. Development autologin and empty-password settings should be explicit build variants, with a check preventing them from entering the release image.
+
+A read-only root affects password updates and host-key storage. Provide a defined persistent location or provisioning mechanism, and test factory reset behavior.
+
+> [!NOTE]
+> **Not run on the reference setup:** pristine-image first-login policy and production credential provisioning in this continuation.
+
+## References
+
+- Local BSP: `poky/meta/classes/extrausers.bbclass`, useradd classes
+- AMD UG1144 (2024.1), rootfs user configuration
+- Reference QEMU setup notes
 
 ---
 

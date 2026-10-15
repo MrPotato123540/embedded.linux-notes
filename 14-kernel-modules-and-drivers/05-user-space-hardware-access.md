@@ -1,16 +1,33 @@
 # Accessing Hardware From User Space
 
-> [!NOTE]
-> 🚧 **Planned.** This section is written in work package [WP-14](../ROADMAP.md#wp-14). The outline below is the agreed scope and will be replaced by the full text.
+> **Applies to:** PetaLinux 2024.1 · Zynq UltraScale+ MPSoC
 
 **[14 · Kernel Modules and Device Drivers](README.md)** · Part VI: Linux Kernel and Drivers
 
-## Planned content
+## Choose the narrowest useful interface
 
-- `/dev/mem` and `devmem`: power and danger
-- UIO (`uio_pdrv_genirq`, `generic-uio`) with interrupts
-- GPIO via libgpiod, spidev, i2c-dev, IIO, sysfs class interfaces
-- Choosing between UIO and a kernel driver
+`/dev/mem` exposes physical memory subject to kernel policy. A `devmem` access bypasses the device driver's locking and lifecycle. Reading a register can have side effects, and accessing an unclocked or absent peripheral can fault or stall.
+
+**Userspace I/O (UIO)** can expose mapped device resources and interrupt notification to a userspace driver. It works best for simple, controlled devices. It does not automatically provide a safe DMA buffer-management API.
+
+| Hardware function | Prefer |
+| --- | --- |
+| GPIO lines | libgpiod character-device interface |
+| Supported SPI/I2C transactions | spidev or i2c-dev where appropriate |
+| Measurement channels | IIO |
+| Standard device behavior | Existing kernel subsystem |
+| Simple custom register block | UIO after ownership and interrupt design |
+| Complex DMA/lifecycle | Kernel driver with the relevant APIs |
+
+Binding a generic interface still requires correct device-tree and kernel support. Do not force-bind a device already owned by another driver.
+
+> [!WARNING]
+> Direct register writes can reset active hardware or corrupt memory. Use the hardware specification and a controlled test design.
+
+## References
+
+- Linux 6.6 UIO HOWTO and userspace driver documentation
+- [DMA and memory management](06-dma-and-memory-management.md)
 
 ---
 

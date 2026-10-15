@@ -2,6 +2,26 @@
 
 The guide is written in **work packages (WPs)**. Each work package delivers one chapter: WP-NN corresponds to chapter NN. A work package is finished only when its content has been checked against the 2024.1 sources and, where possible, run on hardware.
 
+## Current writing status
+
+All **180 sections** now contain written material. Work is maintained directly on **main**. New prose uses B1–B2 English while retaining technical names, mechanisms and verification limits.
+
+The chapters remain **In review**, not fully hardware-verified. Local checks include the real BSP metadata, Bootgen 2024.1 decoding, FIT inspection, device-tree decompilation, installed PetaLinux help and a certificate-verification experiment. Earlier captured target sessions remain identified as earlier evidence.
+
+Open validation includes fresh image builds, physical peripheral tests, update interruption tests, security provisioning and board-specific examples. The text identifies these limits. A custom AXI-Lite teaching driver has a separate synthetic register contract; it is not a driver for an unspecified real board.
+
+## Validation record — 15 October 2026
+
+- 211 Markdown files checked; all 180 numbered sections have content and navigation.
+- 1,941 local file links and heading targets checked with no missing targets.
+- Code-fence balance and Git whitespace checks passed.
+- Selected boot-header fields, FIT payload sizes and quoted boot logs matched the saved evidence.
+- Bootgen **2024.1** decoded the actual BSP boot image; the older host default was not used for the final record.
+- The supplied BSP device tree decompiled successfully with four warnings. These concern address-cell/provider metadata and a symbol-name interpretation; they were not presented as a clean schema-validation result.
+- The synthetic PL-ID module compiled against host Linux 6.8.0-138 headers. Compiler-version and missing-BTF-input warnings are documented in section 14.04. No module was loaded, and this does not verify the PetaLinux 6.6 Arm64 target.
+- The synthetic DTS compiled without warnings. Local OpenSSL verification accepted the expected identity and rejected the wrong hostname.
+- External references were consulted selectively. This was not a complete automated availability check of every external URL.
+
 ## How a work package is executed
 
 1. **Scope.** Review the planned outline in the chapter's section files, then add, drop or reorder topics.
@@ -38,31 +58,31 @@ The guide is written in **work packages (WPs)**. Each work package delivers one 
 | [WP-01](#wp-01) | [01 · Linux Fundamentals](01-linux-fundamentals/README.md) | 8 | 1 | – | 👀 |
 | [WP-02](#wp-02) | [02 · Embedded Linux Concepts](02-embedded-linux-concepts/README.md) | 4 | 1 | [WP-01](#wp-01) | 👀 |
 | [WP-03](#wp-03) | [03 · Zynq UltraScale+ MPSoC Architecture](03-zynqmp-architecture/README.md) | 10 | 1 | – | 👀 |
-| [WP-04](#wp-04) | [04 · The Yocto Project](04-yocto-project/README.md) | 8 | 1 | [WP-01](#wp-01), [WP-02](#wp-02) | 🚧 |
-| [WP-05](#wp-05) | [05 · PetaLinux 2024.1](05-petalinux/README.md) | 11 | 1 | [WP-04](#wp-04) | 🚧 |
-| [WP-06](#wp-06) | [06 · Boot Sequence](06-boot-sequence/README.md) | 15 | 1 | [WP-03](#wp-03) | 🚧 |
-| [WP-07](#wp-07) | [07 · Boot Images, BIF and Bootgen](07-boot-images-and-bootgen/README.md) | 6 | 1 | [WP-06](#wp-06) | 🚧 |
-| [WP-08](#wp-08) | [08 · First Stage Boot Loader (FSBL)](08-fsbl/README.md) | 5 | 1 | [WP-06](#wp-06), [WP-07](#wp-07) | 🚧 |
-| [WP-09](#wp-09) | [09 · PMU and PMU Firmware](09-pmu-firmware/README.md) | 6 | 1 | [WP-03](#wp-03), [WP-06](#wp-06) | 🚧 |
-| [WP-10](#wp-10) | [10 · Trusted Firmware-A (BL31)](10-trusted-firmware-a/README.md) | 4 | 1 | [WP-03](#wp-03), [WP-06](#wp-06) | 🚧 |
-| [WP-11](#wp-11) | [11 · U-Boot](11-u-boot/README.md) | 6 | 1 | [WP-06](#wp-06) | 🚧 |
-| [WP-12](#wp-12) | [12 · Device Tree](12-device-tree/README.md) | 6 | 1 | [WP-03](#wp-03) | 🚧 |
-| [WP-13](#wp-13) | [13 · The Linux Kernel](13-linux-kernel/README.md) | 6 | 1 | [WP-02](#wp-02), [WP-12](#wp-12) | 🚧 |
-| [WP-14](#wp-14) | [14 · Kernel Modules and Device Drivers](14-kernel-modules-and-drivers/README.md) | 6 | 1 | [WP-12](#wp-12), [WP-13](#wp-13) | 🚧 |
-| [WP-15](#wp-15) | [15 · Root Filesystem and Init](15-root-filesystem-and-init/README.md) | 9 | 1 | [WP-13](#wp-13) | 🚧 |
-| [WP-16](#wp-16) | [16 · Application Development](16-application-development/README.md) | 6 | 1 | [WP-04](#wp-04), [WP-05](#wp-05) | 🚧 |
-| [WP-17](#wp-17) | [17 · PL Integration, FPGA Manager and DFX](17-pl-integration-and-dfx/README.md) | 6 | 2 | [WP-03](#wp-03), [WP-12](#wp-12), [WP-14](#wp-14) | 🚧 |
-| [WP-18](#wp-18) | [18 · XRT and Hardware Acceleration](18-xrt-and-acceleration/README.md) | 4 | 2 | [WP-17](#wp-17) | 🚧 |
-| [WP-19](#wp-19) | [19 · Graphics and Display](19-graphics-and-display/README.md) | 3 | 2 | [WP-13](#wp-13), [WP-14](#wp-14) | 🚧 |
-| [WP-20](#wp-20) | [20 · Video and Multimedia](20-video-and-multimedia/README.md) | 5 | 2 | [WP-14](#wp-14), [WP-17](#wp-17) | 🚧 |
-| [WP-21](#wp-21) | [21 · RPU and OpenAMP](21-rpu-and-openamp/README.md) | 6 | 2 | [WP-03](#wp-03), [WP-12](#wp-12) | 🚧 |
-| [WP-22](#wp-22) | [22 · Networking and Peripherals](22-networking-and-peripherals/README.md) | 6 | 2 | [WP-12](#wp-12), [WP-13](#wp-13) | 🚧 |
-| [WP-23](#wp-23) | [23 · Storage, Updates and Production](23-storage-updates-and-production/README.md) | 8 | 2 | [WP-07](#wp-07), [WP-15](#wp-15) | 🚧 |
-| [WP-24](#wp-24) | [24 · Debugging and Board Bring-Up](24-debugging-and-bring-up/README.md) | 5 | 2 | [WP-06](#wp-06) | 🚧 |
-| [WP-25](#wp-25) | [25 · Security Fundamentals and Cryptography](25-security-fundamentals-and-cryptography/README.md) | 4 | 3 | – | 🚧 |
-| [WP-26](#wp-26) | [26 · ZynqMP Hardware Security and Secure Boot](26-zynqmp-hardware-security-and-secure-boot/README.md) | 8 | 3 | [WP-06](#wp-06), [WP-07](#wp-07), [WP-25](#wp-25) | 🚧 |
-| [WP-27](#wp-27) | [27 · Linux and Network Security](27-linux-and-network-security/README.md) | 5 | 3 | [WP-01](#wp-01), [WP-25](#wp-25) | 🚧 |
-| [WP-28](#wp-28) | [Appendices](appendices/README.md) | 4 | 4 | – | 🚧 |
+| [WP-04](#wp-04) | [04 · The Yocto Project](04-yocto-project/README.md) | 8 | 1 | [WP-01](#wp-01), [WP-02](#wp-02) | 👀 |
+| [WP-05](#wp-05) | [05 · PetaLinux 2024.1](05-petalinux/README.md) | 11 | 1 | [WP-04](#wp-04) | 👀 |
+| [WP-06](#wp-06) | [06 · Boot Sequence](06-boot-sequence/README.md) | 15 | 1 | [WP-03](#wp-03) | 👀 |
+| [WP-07](#wp-07) | [07 · Boot Images, BIF and Bootgen](07-boot-images-and-bootgen/README.md) | 6 | 1 | [WP-06](#wp-06) | 👀 |
+| [WP-08](#wp-08) | [08 · First Stage Boot Loader (FSBL)](08-fsbl/README.md) | 5 | 1 | [WP-06](#wp-06), [WP-07](#wp-07) | 👀 |
+| [WP-09](#wp-09) | [09 · PMU and PMU Firmware](09-pmu-firmware/README.md) | 6 | 1 | [WP-03](#wp-03), [WP-06](#wp-06) | 👀 |
+| [WP-10](#wp-10) | [10 · Trusted Firmware-A (BL31)](10-trusted-firmware-a/README.md) | 4 | 1 | [WP-03](#wp-03), [WP-06](#wp-06) | 👀 |
+| [WP-11](#wp-11) | [11 · U-Boot](11-u-boot/README.md) | 6 | 1 | [WP-06](#wp-06) | 👀 |
+| [WP-12](#wp-12) | [12 · Device Tree](12-device-tree/README.md) | 6 | 1 | [WP-03](#wp-03) | 👀 |
+| [WP-13](#wp-13) | [13 · The Linux Kernel](13-linux-kernel/README.md) | 6 | 1 | [WP-02](#wp-02), [WP-12](#wp-12) | 👀 |
+| [WP-14](#wp-14) | [14 · Kernel Modules and Device Drivers](14-kernel-modules-and-drivers/README.md) | 6 | 1 | [WP-12](#wp-12), [WP-13](#wp-13) | 👀 |
+| [WP-15](#wp-15) | [15 · Root Filesystem and Init](15-root-filesystem-and-init/README.md) | 9 | 1 | [WP-13](#wp-13) | 👀 |
+| [WP-16](#wp-16) | [16 · Application Development](16-application-development/README.md) | 6 | 1 | [WP-04](#wp-04), [WP-05](#wp-05) | 👀 |
+| [WP-17](#wp-17) | [17 · PL Integration, FPGA Manager and DFX](17-pl-integration-and-dfx/README.md) | 6 | 2 | [WP-03](#wp-03), [WP-12](#wp-12), [WP-14](#wp-14) | 👀 |
+| [WP-18](#wp-18) | [18 · XRT and Hardware Acceleration](18-xrt-and-acceleration/README.md) | 4 | 2 | [WP-17](#wp-17) | 👀 |
+| [WP-19](#wp-19) | [19 · Graphics and Display](19-graphics-and-display/README.md) | 3 | 2 | [WP-13](#wp-13), [WP-14](#wp-14) | 👀 |
+| [WP-20](#wp-20) | [20 · Video and Multimedia](20-video-and-multimedia/README.md) | 5 | 2 | [WP-14](#wp-14), [WP-17](#wp-17) | 👀 |
+| [WP-21](#wp-21) | [21 · RPU and OpenAMP](21-rpu-and-openamp/README.md) | 6 | 2 | [WP-03](#wp-03), [WP-12](#wp-12) | 👀 |
+| [WP-22](#wp-22) | [22 · Networking and Peripherals](22-networking-and-peripherals/README.md) | 6 | 2 | [WP-12](#wp-12), [WP-13](#wp-13) | 👀 |
+| [WP-23](#wp-23) | [23 · Storage, Updates and Production](23-storage-updates-and-production/README.md) | 8 | 2 | [WP-07](#wp-07), [WP-15](#wp-15) | 👀 |
+| [WP-24](#wp-24) | [24 · Debugging and Board Bring-Up](24-debugging-and-bring-up/README.md) | 5 | 2 | [WP-06](#wp-06) | 👀 |
+| [WP-25](#wp-25) | [25 · Security Fundamentals and Cryptography](25-security-fundamentals-and-cryptography/README.md) | 4 | 3 | – | 👀 |
+| [WP-26](#wp-26) | [26 · ZynqMP Hardware Security and Secure Boot](26-zynqmp-hardware-security-and-secure-boot/README.md) | 8 | 3 | [WP-06](#wp-06), [WP-07](#wp-07), [WP-25](#wp-25) | 👀 |
+| [WP-27](#wp-27) | [27 · Linux and Network Security](27-linux-and-network-security/README.md) | 5 | 3 | [WP-01](#wp-01), [WP-25](#wp-25) | 👀 |
+| [WP-28](#wp-28) | [Appendices](appendices/README.md) | 4 | 4 | – | 👀 |
 
 Total: 28 chapters, 180 sections.
 
@@ -215,7 +235,7 @@ PS and PL, the processing units, the full address map, on-chip memories, interco
 
 ### WP-04 · The Yocto Project
 
-**Chapter:** [04 · The Yocto Project](04-yocto-project/README.md) · **Phase:** 1 · **Depends on:** [WP-01](#wp-01), [WP-02](#wp-02) · **Status:** 🚧 Planned
+**Chapter:** [04 · The Yocto Project](04-yocto-project/README.md) · **Phase:** 1 · **Depends on:** [WP-01](#wp-01), [WP-02](#wp-02) · **Status:** 👀 In review
 
 OpenEmbedded, BitBake, layers, recipes, tasks, images and packagegroups: the machinery underneath PetaLinux.
 
@@ -246,7 +266,7 @@ OpenEmbedded, BitBake, layers, recipes, tasks, images and packagegroups: the mac
 
 ### WP-05 · PetaLinux 2024.1
 
-**Chapter:** [05 · PetaLinux 2024.1](05-petalinux/README.md) · **Phase:** 1 · **Depends on:** [WP-04](#wp-04) · **Status:** 🚧 Planned
+**Chapter:** [05 · PetaLinux 2024.1](05-petalinux/README.md) · **Phase:** 1 · **Depends on:** [WP-04](#wp-04) · **Status:** 👀 In review
 
 PetaLinux tools in depth, dissected on a real 2024.1 project: file hierarchy, commands, configuration, every output file and how to customize the system.
 
@@ -279,7 +299,7 @@ PetaLinux tools in depth, dissected on a real 2024.1 project: file hierarchy, co
 
 ### WP-06 · Boot Sequence
 
-**Chapter:** [06 · Boot Sequence](06-boot-sequence/README.md) · **Phase:** 1 · **Depends on:** [WP-03](#wp-03) · **Status:** 🚧 Planned
+**Chapter:** [06 · Boot Sequence](06-boot-sequence/README.md) · **Phase:** 1 · **Depends on:** [WP-03](#wp-03) · **Status:** 👀 In review
 
 From power-on reset to the login prompt, step by step, with every processor, exception level, load address and handoff.
 
@@ -321,7 +341,7 @@ From power-on reset to the login prompt, step by step, with every processor, exc
 
 ### WP-07 · Boot Images, BIF and Bootgen
 
-**Chapter:** [07 · Boot Images, BIF and Bootgen](07-boot-images-and-bootgen/README.md) · **Phase:** 1 · **Depends on:** [WP-06](#wp-06) · **Status:** 🚧 Planned
+**Chapter:** [07 · Boot Images, BIF and Bootgen](07-boot-images-and-bootgen/README.md) · **Phase:** 1 · **Depends on:** [WP-06](#wp-06) · **Status:** 👀 In review
 
 How BOOT.BIN is described in a BIF, built with Bootgen, inspected, combined with bitstreams and written to flash.
 
@@ -349,7 +369,7 @@ How BOOT.BIN is described in a BIF, built with Bootgen, inspected, combined with
 
 ### WP-08 · First Stage Boot Loader (FSBL)
 
-**Chapter:** [08 · First Stage Boot Loader (FSBL)](08-fsbl/README.md) · **Phase:** 1 · **Depends on:** [WP-06](#wp-06), [WP-07](#wp-07) · **Status:** 🚧 Planned
+**Chapter:** [08 · First Stage Boot Loader (FSBL)](08-fsbl/README.md) · **Phase:** 1 · **Depends on:** [WP-06](#wp-06), [WP-07](#wp-07) · **Status:** 👀 In review
 
 The ZynqMP FSBL from embeddedsw xilinx_v2024.1: source walkthrough, build flows, hooks, customization and debugging.
 
@@ -376,7 +396,7 @@ The ZynqMP FSBL from embeddedsw xilinx_v2024.1: source walkthrough, build flows,
 
 ### WP-09 · PMU and PMU Firmware
 
-**Chapter:** [09 · PMU and PMU Firmware](09-pmu-firmware/README.md) · **Phase:** 1 · **Depends on:** [WP-03](#wp-03), [WP-06](#wp-06) · **Status:** 🚧 Planned
+**Chapter:** [09 · PMU and PMU Firmware](09-pmu-firmware/README.md) · **Phase:** 1 · **Depends on:** [WP-03](#wp-03), [WP-06](#wp-06) · **Status:** 👀 In review
 
 The platform management unit: power, reset and error management, the EEMI interface, how to send requests to the PMU and how to extend its firmware.
 
@@ -405,7 +425,7 @@ The platform management unit: power, reset and error management, the EEMI interf
 
 ### WP-10 · Trusted Firmware-A (BL31)
 
-**Chapter:** [10 · Trusted Firmware-A (BL31)](10-trusted-firmware-a/README.md) · **Phase:** 1 · **Depends on:** [WP-03](#wp-03), [WP-06](#wp-06) · **Status:** 🚧 Planned
+**Chapter:** [10 · Trusted Firmware-A (BL31)](10-trusted-firmware-a/README.md) · **Phase:** 1 · **Depends on:** [WP-03](#wp-03), [WP-06](#wp-06) · **Status:** 👀 In review
 
 TF-A (formerly ATF) on ZynqMP: the EL3 runtime that provides PSCI, forwards platform management calls and hosts secure services.
 
@@ -431,7 +451,7 @@ TF-A (formerly ATF) on ZynqMP: the EL3 runtime that provides PSCI, forwards plat
 
 ### WP-11 · U-Boot
 
-**Chapter:** [11 · U-Boot](11-u-boot/README.md) · **Phase:** 1 · **Depends on:** [WP-06](#wp-06) · **Status:** 🚧 Planned
+**Chapter:** [11 · U-Boot](11-u-boot/README.md) · **Phase:** 1 · **Depends on:** [WP-06](#wp-06) · **Status:** 👀 In review
 
 U-Boot on ZynqMP: essential commands, environment, boot.scr and uEnv.txt, FIT images, exactly how it loads and starts Linux, and how to customize it.
 
@@ -460,7 +480,7 @@ U-Boot on ZynqMP: essential commands, environment, boot.scr and uEnv.txt, FIT im
 
 ### WP-12 · Device Tree
 
-**Chapter:** [12 · Device Tree](12-device-tree/README.md) · **Phase:** 1 · **Depends on:** [WP-03](#wp-03) · **Status:** 🚧 Planned
+**Chapter:** [12 · Device Tree](12-device-tree/README.md) · **Phase:** 1 · **Depends on:** [WP-03](#wp-03) · **Status:** 👀 In review
 
 Describing hardware to software: DTS syntax, bindings, the Xilinx Device Tree Generator, System Device Tree, overlays (DTBO) and debugging.
 
@@ -489,7 +509,7 @@ Describing hardware to software: DTS syntax, bindings, the Xilinx Device Tree Ge
 
 ### WP-13 · The Linux Kernel
 
-**Chapter:** [13 · The Linux Kernel](13-linux-kernel/README.md) · **Phase:** 1 · **Depends on:** [WP-02](#wp-02), [WP-12](#wp-12) · **Status:** 🚧 Planned
+**Chapter:** [13 · The Linux Kernel](13-linux-kernel/README.md) · **Phase:** 1 · **Depends on:** [WP-02](#wp-02), [WP-12](#wp-12) · **Status:** 👀 In review
 
 Kernel fundamentals, linux-xlnx, kernel image formats (Image, Image.gz, image.ub), configuration, building, debugging and real-time Linux.
 
@@ -517,7 +537,7 @@ Kernel fundamentals, linux-xlnx, kernel image formats (Image, Image.gz, image.ub
 
 ### WP-14 · Kernel Modules and Device Drivers
 
-**Chapter:** [14 · Kernel Modules and Device Drivers](14-kernel-modules-and-drivers/README.md) · **Phase:** 1 · **Depends on:** [WP-12](#wp-12), [WP-13](#wp-13) · **Status:** 🚧 Planned
+**Chapter:** [14 · Kernel Modules and Device Drivers](14-kernel-modules-and-drivers/README.md) · **Phase:** 1 · **Depends on:** [WP-12](#wp-12), [WP-13](#wp-13) · **Status:** 👀 In review
 
 Built-in (static) vs. loadable (dynamic) modules, in-tree vs. out-of-tree, kernel headers, adding modules to PetaLinux, the driver model, user-space hardware access and DMA.
 
@@ -545,7 +565,7 @@ Built-in (static) vs. loadable (dynamic) modules, in-tree vs. out-of-tree, kerne
 
 ### WP-15 · Root Filesystem and Init
 
-**Chapter:** [15 · Root Filesystem and Init](15-root-filesystem-and-init/README.md) · **Phase:** 1 · **Depends on:** [WP-13](#wp-13) · **Status:** 🚧 Planned
+**Chapter:** [15 · Root Filesystem and Init](15-root-filesystem-and-init/README.md) · **Phase:** 1 · **Depends on:** [WP-13](#wp-13) · **Status:** 👀 In review
 
 What a root filesystem is, initrd vs. initramfs, filesystem types (ext4, UBIFS, JFFS2, ...), rootfs configuration and packagegroups, init systems and BusyBox.
 
@@ -577,7 +597,7 @@ What a root filesystem is, initrd vs. initramfs, filesystem types (ext4, UBIFS, 
 
 ### WP-16 · Application Development
 
-**Chapter:** [16 · Application Development](16-application-development/README.md) · **Phase:** 1 · **Depends on:** [WP-04](#wp-04), [WP-05](#wp-05) · **Status:** 🚧 Planned
+**Chapter:** [16 · Application Development](16-application-development/README.md) · **Phase:** 1 · **Depends on:** [WP-04](#wp-04), [WP-05](#wp-05) · **Status:** 👀 In review
 
 Cross-compiling, debugging and profiling applications, and integrating them into the system as proper services.
 
@@ -605,7 +625,7 @@ Cross-compiling, debugging and profiling applications, and integrating them into
 
 ### WP-17 · PL Integration, FPGA Manager and DFX
 
-**Chapter:** [17 · PL Integration, FPGA Manager and DFX](17-pl-integration-and-dfx/README.md) · **Phase:** 2 · **Depends on:** [WP-03](#wp-03), [WP-12](#wp-12), [WP-14](#wp-14) · **Status:** 🚧 Planned
+**Chapter:** [17 · PL Integration, FPGA Manager and DFX](17-pl-integration-and-dfx/README.md) · **Phase:** 2 · **Depends on:** [WP-03](#wp-03), [WP-12](#wp-12), [WP-14](#wp-14) · **Status:** 👀 In review
 
 Using the programmable logic from Linux: hardware handoff, PL peripherals, the FPGA manager, Dynamic Function eXchange (partial reconfiguration), dfx-mgr and PS-PL DMA.
 
@@ -635,7 +655,7 @@ Using the programmable logic from Linux: hardware handoff, PL peripherals, the F
 
 ### WP-18 · XRT and Hardware Acceleration
 
-**Chapter:** [18 · XRT and Hardware Acceleration](18-xrt-and-acceleration/README.md) · **Phase:** 2 · **Depends on:** [WP-17](#wp-17) · **Status:** 🚧 Planned
+**Chapter:** [18 · XRT and Hardware Acceleration](18-xrt-and-acceleration/README.md) · **Phase:** 2 · **Depends on:** [WP-17](#wp-17) · **Status:** 👀 In review
 
 The Xilinx Runtime on embedded platforms: zocl, xclbin, Vitis acceleration platforms and AI inference with the DPU.
 
@@ -660,7 +680,7 @@ The Xilinx Runtime on embedded platforms: zocl, xclbin, Vitis acceleration platf
 
 ### WP-19 · Graphics and Display
 
-**Chapter:** [19 · Graphics and Display](19-graphics-and-display/README.md) · **Phase:** 2 · **Depends on:** [WP-13](#wp-13), [WP-14](#wp-14) · **Status:** 🚧 Planned
+**Chapter:** [19 · Graphics and Display](19-graphics-and-display/README.md) · **Phase:** 2 · **Depends on:** [WP-13](#wp-13), [WP-14](#wp-14) · **Status:** 👀 In review
 
 The DisplayPort subsystem, DRM/KMS and the Arm Mali-400 MP2 GPU, from kernel drivers to Wayland and Qt.
 
@@ -684,7 +704,7 @@ The DisplayPort subsystem, DRM/KMS and the Arm Mali-400 MP2 GPU, from kernel dri
 
 ### WP-20 · Video and Multimedia
 
-**Chapter:** [20 · Video and Multimedia](20-video-and-multimedia/README.md) · **Phase:** 2 · **Depends on:** [WP-14](#wp-14), [WP-17](#wp-17) · **Status:** 🚧 Planned
+**Chapter:** [20 · Video and Multimedia](20-video-and-multimedia/README.md) · **Phase:** 2 · **Depends on:** [WP-14](#wp-14), [WP-17](#wp-17) · **Status:** 👀 In review
 
 V4L2, the media controller, media-ctl and v4l2-ctl, GStreamer and the VCU: building camera and video pipelines.
 
@@ -710,7 +730,7 @@ V4L2, the media controller, media-ctl and v4l2-ctl, GStreamer and the VCU: build
 
 ### WP-21 · RPU and OpenAMP
 
-**Chapter:** [21 · RPU and OpenAMP](21-rpu-and-openamp/README.md) · **Phase:** 2 · **Depends on:** [WP-03](#wp-03), [WP-12](#wp-12) · **Status:** 🚧 Planned
+**Chapter:** [21 · RPU and OpenAMP](21-rpu-and-openamp/README.md) · **Phase:** 2 · **Depends on:** [WP-03](#wp-03), [WP-12](#wp-12) · **Status:** 👀 In review
 
 Asymmetric multiprocessing with the Cortex-R5F cluster: firmware on the RPU, remoteproc, RPMsg, libmetal, IPI and shared memory.
 
@@ -737,7 +757,7 @@ Asymmetric multiprocessing with the Cortex-R5F cluster: firmware on the RPU, rem
 
 ### WP-22 · Networking and Peripherals
 
-**Chapter:** [22 · Networking and Peripherals](22-networking-and-peripherals/README.md) · **Phase:** 2 · **Depends on:** [WP-12](#wp-12), [WP-13](#wp-13) · **Status:** 🚧 Planned
+**Chapter:** [22 · Networking and Peripherals](22-networking-and-peripherals/README.md) · **Phase:** 2 · **Depends on:** [WP-12](#wp-12), [WP-13](#wp-13) · **Status:** 👀 In review
 
 Ethernet, network configuration, USB, PCIe, low-speed buses and time synchronization: device tree, drivers and user-space tools.
 
@@ -764,7 +784,7 @@ Ethernet, network configuration, USB, PCIe, low-speed buses and time synchroniza
 
 ### WP-23 · Storage, Updates and Production
 
-**Chapter:** [23 · Storage, Updates and Production](23-storage-updates-and-production/README.md) · **Phase:** 2 · **Depends on:** [WP-07](#wp-07), [WP-15](#wp-15) · **Status:** 🚧 Planned
+**Chapter:** [23 · Storage, Updates and Production](23-storage-updates-and-production/README.md) · **Phase:** 2 · **Depends on:** [WP-07](#wp-07), [WP-15](#wp-15) · **Status:** 👀 In review
 
 Flash management (MTD, UBI/UBIFS, SD/eMMC), software update strategies, boot-time optimization, reliability, licensing and CI.
 
@@ -793,7 +813,7 @@ Flash management (MTD, UBI/UBIFS, SD/eMMC), software update strategies, boot-tim
 
 ### WP-24 · Debugging and Board Bring-Up
 
-**Chapter:** [24 · Debugging and Board Bring-Up](24-debugging-and-bring-up/README.md) · **Phase:** 2 · **Depends on:** [WP-06](#wp-06) · **Status:** 🚧 Planned
+**Chapter:** [24 · Debugging and Board Bring-Up](24-debugging-and-bring-up/README.md) · **Phase:** 2 · **Depends on:** [WP-06](#wp-06) · **Status:** 👀 In review
 
 JTAG, XSDB/XSCT, QEMU, DDR bring-up and a systematic approach to bringing up a custom board.
 
@@ -819,7 +839,7 @@ JTAG, XSDB/XSCT, QEMU, DDR bring-up and a systematic approach to bringing up a c
 
 ### WP-25 · Security Fundamentals and Cryptography
 
-**Chapter:** [25 · Security Fundamentals and Cryptography](25-security-fundamentals-and-cryptography/README.md) · **Phase:** 3 · **Depends on:** – · **Status:** 🚧 Planned
+**Chapter:** [25 · Security Fundamentals and Cryptography](25-security-fundamentals-and-cryptography/README.md) · **Phase:** 3 · **Depends on:** – · **Status:** 👀 In review
 
 Security principles, threat modeling and the cryptography needed to design secure embedded products. No prior security experience is assumed.
 
@@ -844,7 +864,7 @@ Security principles, threat modeling and the cryptography needed to design secur
 
 ### WP-26 · ZynqMP Hardware Security and Secure Boot
 
-**Chapter:** [26 · ZynqMP Hardware Security and Secure Boot](26-zynqmp-hardware-security-and-secure-boot/README.md) · **Phase:** 3 · **Depends on:** [WP-06](#wp-06), [WP-07](#wp-07), [WP-25](#wp-25) · **Status:** 🚧 Planned
+**Chapter:** [26 · ZynqMP Hardware Security and Secure Boot](26-zynqmp-hardware-security-and-secure-boot/README.md) · **Phase:** 3 · **Depends on:** [WP-06](#wp-06), [WP-07](#wp-07), [WP-25](#wp-25) · **Status:** 👀 In review
 
 The root of trust, boot image authentication and encryption, eFUSE/BBRAM, and an end-to-end chain of trust from the BootROM to the root filesystem.
 
@@ -874,7 +894,7 @@ The root of trust, boot image authentication and encryption, eFUSE/BBRAM, and an
 
 ### WP-27 · Linux and Network Security
 
-**Chapter:** [27 · Linux and Network Security](27-linux-and-network-security/README.md) · **Phase:** 3 · **Depends on:** [WP-01](#wp-01), [WP-25](#wp-25) · **Status:** 🚧 Planned
+**Chapter:** [27 · Linux and Network Security](27-linux-and-network-security/README.md) · **Phase:** 3 · **Depends on:** [WP-01](#wp-01), [WP-25](#wp-25) · **Status:** 👀 In review
 
 Hardening the operating system and its network exposure: SSH in depth, firewalls, TLS, VPNs, secure updates and vulnerability management.
 
@@ -901,7 +921,7 @@ Hardening the operating system and its network exposure: SSH in depth, firewalls
 
 ### WP-28 · Appendices and Final Review
 
-**Chapter:** [Appendices](appendices/README.md) · **Phase:** 4 · **Depends on:** – · **Status:** 🚧 Planned
+**Chapter:** [Appendices](appendices/README.md) · **Phase:** 4 · **Depends on:** – · **Status:** 👀 In review
 
 Glossary, command cheat sheets, a register quick reference and the full list of references, plus a final consistency pass over the whole guide.
 
