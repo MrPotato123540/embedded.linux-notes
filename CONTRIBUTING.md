@@ -12,6 +12,8 @@ These rules keep about 180 sections, written over many work packages, consistent
 ## Language and tone
 
 - English (US spelling), present tense, second person ("you"), active voice.
+- Write at **B1–B2 English level**. Use familiar words and short, direct sentences. Explain necessary technical terms when they first appear.
+- Keep the full technical depth: preserve exact names, mechanisms, limits, source references and verification notes. Simplify the language, not the engineering.
 - Keep paragraphs short. One idea per paragraph.
 - Spell out each acronym at its first use in a section, and add it to the [glossary](appendices/01-glossary.md).
 - Use exact numbers and names, not adjectives. Write "256 KB OCM at `0xFFFC0000`", not "a small on-chip memory".

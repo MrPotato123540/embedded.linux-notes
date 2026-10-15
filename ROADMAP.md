@@ -37,7 +37,7 @@ The guide is written in **work packages (WPs)**. Each work package delivers one 
 | [WP-00](#wp-00) | Repository scaffolding | – | 0 | – | ✅ |
 | [WP-01](#wp-01) | [01 · Linux Fundamentals](01-linux-fundamentals/README.md) | 8 | 1 | – | 👀 |
 | [WP-02](#wp-02) | [02 · Embedded Linux Concepts](02-embedded-linux-concepts/README.md) | 4 | 1 | [WP-01](#wp-01) | 👀 |
-| [WP-03](#wp-03) | [03 · Zynq UltraScale+ MPSoC Architecture](03-zynqmp-architecture/README.md) | 10 | 1 | – | 🚧 |
+| [WP-03](#wp-03) | [03 · Zynq UltraScale+ MPSoC Architecture](03-zynqmp-architecture/README.md) | 10 | 1 | – | 👀 |
 | [WP-04](#wp-04) | [04 · The Yocto Project](04-yocto-project/README.md) | 8 | 1 | [WP-01](#wp-01), [WP-02](#wp-02) | 🚧 |
 | [WP-05](#wp-05) | [05 · PetaLinux 2024.1](05-petalinux/README.md) | 11 | 1 | [WP-04](#wp-04) | 🚧 |
 | [WP-06](#wp-06) | [06 · Boot Sequence](06-boot-sequence/README.md) | 15 | 1 | [WP-03](#wp-03) | 🚧 |
@@ -173,7 +173,7 @@ The building blocks of every embedded Linux system, plus the toolchains, build s
 
 ### WP-03 · Zynq UltraScale+ MPSoC Architecture
 
-**Chapter:** [03 · Zynq UltraScale+ MPSoC Architecture](03-zynqmp-architecture/README.md) · **Phase:** 1 · **Depends on:** – · **Status:** 🚧 Planned
+**Chapter:** [03 · Zynq UltraScale+ MPSoC Architecture](03-zynqmp-architecture/README.md) · **Phase:** 1 · **Depends on:** – · **Status:** 👀 In review
 
 PS and PL, the processing units, the full address map, on-chip memories, interconnect and coherency, clocks, power, reset, interrupts and exception levels: the hardware knowledge every BSP engineer needs.
 
@@ -202,6 +202,14 @@ PS and PL, the processing units, the full address map, on-chip memories, interco
 - Every address and register cross-checked against UG1085/UG1087
 - Selected registers read live with `devmem` on the target and `mrd` in XSDB
 - Address map compared with the XSA and generated device tree of the real 2024.1 BSP
+
+**Review status and open items**
+
+- All ten sections are drafted. Section 10 uses B1–B2 English and cites architecture documentation, the pinned Linux firmware driver and saved reference captures.
+- Review sections 01–09 against their sources and the B1–B2 language rule; their existing command transcripts were not rerun in this continuation.
+- Check physical register access through XSDB, SMMU translation and reset behavior on hardware (see the notes in sections 04, 06 and 07).
+- Validate OP-TEE, HVC guest calls and Secure memory/peripheral isolation on a suitable setup (section 10). Saved QEMU boot logs do not prove hardware isolation.
+- Keep WP-03 in review until these checks are complete.
 
 <a id="wp-04"></a>
 
