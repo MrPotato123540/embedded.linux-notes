@@ -1,4 +1,4 @@
-# Zynq UltraScale+ MPSoC Embedded Linux Guide
+# Zynq UltraScale+ MPSoC Embedded Linux Guide 
 
 An advanced, source-verified guide to building, booting, customizing and securing embedded Linux on AMD (formerly Xilinx) **Zynq UltraScale+ MPSoC** devices, anchored to **PetaLinux 2024.1** and the matching AMD open-source repositories.
 
