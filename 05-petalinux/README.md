@@ -6,7 +6,7 @@ PetaLinux tools in depth, dissected on a real 2024.1 project: file hierarchy, co
 
 **Prerequisites:** [04 · The Yocto Project](../04-yocto-project/README.md)
 
-All sections contain written material. Source and artifact checks are recorded in the text. Target-specific tests marked **Not run on the reference setup** remain open.
+The advanced-depth pass expanded every section in this chapter on 16 October 2026. The text explains mechanisms, worked examples, failure analysis and evidence limits. The chapter remains in review; target-specific tests marked **Not run on the reference setup** remain open.
 
 ## Sections
 
