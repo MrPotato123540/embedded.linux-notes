@@ -9,6 +9,20 @@ These rules keep about 180 sections, written over many work packages, consistent
 - Give a **source** for every hard fact.
 - Show only **commands that have been run** and output that came from a real system.
 
+## Required technical depth
+
+A populated outline is not a completed section. Keep the technical depth of the detailed architecture chapters while using B1–B2 English.
+
+- Explain the mechanism and its state transitions, data flow or ownership rules.
+- Follow at least one concrete example through the relevant files, functions, artifacts or runtime observations. Explain what each result means.
+- Give the exact release-specific source path when discussing implementation behavior. Distinguish a source default from an observed board value.
+- Explain failure cases with evidence that separates competing causes, not only a list of possible problems.
+- State compatibility limits, memory/resource lifetimes and integration effects when they matter to the topic.
+- Separate executed experiments, inspected sources and proposed hardware procedures. Never invent successful output.
+- Use tables, diagrams and code where they clarify the mechanism. Extra length and repeated checklists are not substitutes for engineering detail.
+
+The advanced-depth revision is tracked separately from initial draft coverage in [ROADMAP.md](ROADMAP.md). Do not mark the entire guide complete because every file has prose.
+
 ## Language and tone
 
 - English (US spelling), present tense, second person ("you"), active voice.

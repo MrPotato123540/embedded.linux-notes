@@ -4,11 +4,33 @@ The guide is written in **work packages (WPs)**. Each work package delivers one 
 
 ## Current writing status
 
-All **180 sections** now contain written material. Work is maintained directly on **main**. New prose uses B1–B2 English while retaining technical names, mechanisms and verification limits.
+All **180 sections** have an initial draft. This is a coverage statement, not a claim that every section has the required technical depth. An advanced-depth revision is in progress after review found that most later drafts were too brief. Work stays directly on **main**, and English remains B1–B2.
 
 The chapters remain **In review**, not fully hardware-verified. Local checks include the real BSP metadata, Bootgen 2024.1 decoding, FIT inspection, device-tree decompilation, installed PetaLinux help and a certificate-verification experiment. Earlier captured target sessions remain identified as earlier evidence.
 
 Open validation includes fresh image builds, physical peripheral tests, update interruption tests, security provisioning and board-specific examples. The text identifies these limits. A custom AXI-Lite teaching driver has a separate synthetic register contract; it is not a driver for an unspecified real board.
+
+## Advanced-depth revision — 16 October 2026
+
+| Scope | Sections | Depth revision |
+| --- | ---: | --- |
+| Chapters 01–03 | 22 | Existing detailed reference chapters; retain and review for consistency |
+| Chapter 04 · Yocto | 8 | Expanded: task graph, metadata evaluation, layers, packages, workspace and SDK contracts |
+| Chapter 05 · PetaLinux | 11 | Expanded: real project configuration, artifact provenance, customization and hardware-update effects |
+| Chapter 06 · Boot sequence | 15 | Expanded: stage contracts, pinned FSBL/TF-A/Linux source paths, memory lifetimes and diagnosis |
+| Chapter 07 · Bootgen | 6 | Expanded: BIF interpretation, binary structures, executed regeneration and storage boundaries |
+| Chapters 08–27 and appendices | 118 | Depth revision still pending; current short drafts are not accepted as finished advanced sections |
+
+This pass has expanded **40 of the 158 later sections**. It has not completed the requested guide-wide revision. Chapter status remains **In review**, including the expanded chapters.
+
+New evidence:
+
+- Read the pinned 2024.1 FSBL state machine, initialization, loading, handoff and error definitions; TF-A ZynqMP early setup; and Linux Arm64 boot protocol and init selection.
+- Correctly identified TF-A's `Secure code at 0x60000000` message as the prepared BL32 entry, not BL31's own address or proof of a loaded trusted OS.
+- Inspected the supplied FSBL and BL31 ELF program headers and sections. Explained stored bytes, zero-initialized regions, runtime memory and lifetime-based reuse.
+- Recreated the supplied `BOOT.BIN` with Bootgen 2024.1 from the original five binary inputs and unchanged BIF attributes. Both files are 1,838,720 bytes and have SHA-256 `97363bab9a28ecda6713840aa55986b98b09fd51b016b030224064f04af612ff`.
+- That result verifies packaging reproducibility from supplied binaries. It does not verify a new firmware compilation, PetaLinux wrapper generation, physical boot, flash programming or secure boot.
+- Local links, heading targets, code fences and Git whitespace checks passed after the depth edits. The earlier hardware-validation limits remain in force.
 
 ## Validation record — 15 October 2026
 
