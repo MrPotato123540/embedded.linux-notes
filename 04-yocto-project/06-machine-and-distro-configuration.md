@@ -28,6 +28,56 @@ A **multiconfig** build uses several configurations within one build system. Thi
 - Two boards with the same CPU may still need different memory, peripheral and boot settings.
 - A layer's machine name and an exported hardware platform name need not be identical.
 
+## Separate hardware identity, operating-system policy and image content
+
+A machine configuration answers which hardware the build targets. It can select processor tuning, kernel providers, bootloader settings, device-tree inputs and boot artifacts. A distribution configuration answers which system policy the software follows. It can choose library policy, init-system support and distribution features. An image recipe answers which packages to install for one product image.
+
+These inputs interact, but they should not become one large board file. If two products use the same board with different application sets, they can share the machine and use different images. If one product runs on two boards, it can share distribution policy while selecting two machines. This separation keeps hardware fixes from silently changing login policy or application content.
+
+| Change | Normal place to begin | Evidence after the change |
+| --- | --- | --- |
+| DDR or PS peripheral wiring | Hardware design and exported platform | Imported hardware and generated initialization data |
+| Kernel provider or board DTB | Machine/BSP metadata | Selected provider and deployed DTB |
+| Init-system policy | Distribution configuration | Recipe options and image package set |
+| Product application selection | Image or packagegroup | Image manifest and service behavior |
+| Local cache location | Build configuration | Effective cache paths |
+
+The table identifies ownership, not a universal filename. PetaLinux can generate several of these inputs from project settings, so follow its configuration chain before choosing an edit location.
+
+## Follow the actual PetaLinux include chain
+
+The reference project's `build/conf/local.conf` is not the final answer to every configuration question. A weak machine default can be replaced by generated settings in `plnxtool.conf`. That is why reading one matching line from one file can give the wrong machine name.
+
+An effective value is the result of parsing all active configuration and applying the relevant overrides. When the build selects unexpected software, inspect the assignment history as well as the final value. This shows whether a project option, a machine include or a distribution setting supplied the winning value.
+
+Do not edit generated build files as the only record of a product change. A later configuration run can recreate them. Find the project input that produced the value, make the persistent change there, and confirm the generated result. This is particularly important when hardware import updates machine or device-tree settings.
+
+## Read the ZynqMP machine file as an artifact contract
+
+The shipped `zynqmp-generic.conf` shows that the machine selects more than compiler flags. Its `EXTRA_IMAGEDEPENDS` includes firmware and boot artifacts such as `virtual/fsbl`, `virtual/pmu-firmware`, `arm-trusted-firmware`, `virtual/boot-bin` and `virtual/bootloader`. Its boot-file list includes a boot image, a boot script and a kernel image.
+
+These dependencies make artifacts available for platform assembly. They are not all runtime packages installed into Linux's root filesystem. A firmware ELF may be consumed by Bootgen, while a kernel module package is installed under the target's module directory. Confusing these paths leads to attempts to solve a boot packaging problem with `IMAGE_INSTALL`.
+
+The same machine file also defines QEMU behavior, including hardware-description inputs and loader settings. Therefore, a successful emulator boot can depend on a launch path that loads firmware directly. It is not automatic proof that the physical BootROM can read the generated SD-card or flash image.
+
+## CPU tuning and package reuse
+
+CPU tuning controls the generated instruction set and related ABI choices. A tune describes a software compatibility target, not a complete inventory of the board. Read the tune includes and the actual processor specification before interpreting a tune name as a hardware description.
+
+Package architecture helps the build distinguish reusable output. A package with no architecture-specific content may be shared widely. A binary depends on its target ABI and tuning. A board configuration package can depend on the machine even if it contains only text. Marking machine-dependent content as universally reusable can cause one board's settings to appear in another board's image.
+
+The same principle applies to shared state. Reuse is valuable when the metadata correctly describes which inputs affect output. It becomes misleading when a recipe hides a machine-specific choice in an undeclared host file.
+
+## Multiconfig and heterogeneous processors
+
+ZynqMP can run Linux on Cortex-A53 while another processor runs firmware. These components may need different compilers, operating-system assumptions and output formats. Multiconfig keeps separate configuration contexts while allowing explicit dependencies between their tasks.
+
+A dependency must identify the artifact relationship. For example, a packaging task may need a firmware deploy task from another configuration. Simply enabling two configurations does not establish that order. It also does not make their sysroots interchangeable.
+
+Keep a release record for every participating configuration. A correct Linux build can still package firmware from the wrong hardware revision if the connection is external and untracked. The final record should identify the machine settings, firmware source, hardware export and packaging input together.
+
+**Source trail:** local BSP `build/conf/local.conf`, `build/conf/plnxtool.conf`, `meta-xilinx/meta-xilinx-core/conf/machine/zynqmp-generic.conf`, and `poky/meta/conf/bitbake.conf`. No new multiconfig build was executed for this section.
+
 ## References
 
 - `xilinx-zcu106-2024.1:build/conf/local.conf`, `build/conf/plnxtool.conf`

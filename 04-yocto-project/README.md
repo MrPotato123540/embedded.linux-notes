@@ -6,7 +6,7 @@ OpenEmbedded, BitBake, layers, recipes, tasks, images and packagegroups: the mac
 
 **Prerequisites:** [01 · Linux Fundamentals](../01-linux-fundamentals/README.md) · [02 · Embedded Linux Concepts](../02-embedded-linux-concepts/README.md)
 
-All sections contain written material. Source and artifact checks are recorded in the text. Target-specific tests marked **Not run on the reference setup** remain open.
+The advanced-depth pass expanded every section in this chapter on 16 October 2026. The text explains mechanisms, worked examples, failure analysis and evidence limits. The chapter remains in review; target-specific tests marked **Not run on the reference setup** remain open.
 
 ## Sections
 
