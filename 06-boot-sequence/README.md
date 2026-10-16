@@ -6,7 +6,7 @@ From power-on reset to the login prompt, step by step, with every processor, exc
 
 **Prerequisites:** [03 · Zynq UltraScale+ MPSoC Architecture](../03-zynqmp-architecture/README.md)
 
-All sections contain written material. Source and artifact checks are recorded in the text. Target-specific tests marked **Not run on the reference setup** remain open.
+The advanced-depth pass expanded every section in this chapter on 16 October 2026. The text explains mechanisms, worked examples, failure analysis and evidence limits. The chapter remains in review; target-specific tests marked **Not run on the reference setup** remain open.
 
 ## Sections
 
