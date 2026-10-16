@@ -6,7 +6,7 @@ The platform management unit: power, reset and error management, the EEMI interf
 
 **Prerequisites:** [03 · Zynq UltraScale+ MPSoC Architecture](../03-zynqmp-architecture/README.md) · [06 · Boot Sequence](../06-boot-sequence/README.md)
 
-All sections contain written material. Source and artifact checks are recorded in the text. Target-specific tests marked **Not run on the reference setup** remain open.
+All six sections now follow PMU module dispatch, management-call packing, resource lifetimes, custom-service design and watchdog recovery in the pinned 2024.1 source. Physical power, IPI fault and watchdog tests remain open.
 
 ## Sections
 

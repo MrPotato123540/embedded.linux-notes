@@ -6,7 +6,7 @@ Kernel fundamentals, linux-xlnx, kernel image formats (Image, Image.gz, image.ub
 
 **Prerequisites:** [02 · Embedded Linux Concepts](../02-embedded-linux-concepts/README.md) · [12 · Device Tree](../12-device-tree/README.md)
 
-All sections contain written material. Source and artifact checks are recorded in the text. Target-specific tests marked **Not run on the reference setup** remain open.
+All six sections now cover source-level initialization, exact recipe provenance, measured Image-header placement, configuration/deployment dependencies, debugging and real-time timing analysis. Fresh kernel builds, hardware fault tests and real-time benchmarks remain open.
 
 ## Sections
 

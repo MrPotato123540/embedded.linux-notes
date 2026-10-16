@@ -8,7 +8,7 @@
 
 A **Boot Image Format (BIF)** file describes the payloads passed to Bootgen. It contains an image name, braces and a list of input files with attributes. It is a build input, not a script executed by the board.
 
-The reference BSP supplies this partition order: FSBL, PMU firmware, TF-A, device tree and U-Boot. Its PMU firmware uses `pmufw_image`; the device tree has `load=0x100000`. TF-A uses `exception_level=el-3` and `trustzone`; U-Boot uses `exception_level=el-2`.
+The reference BSP supplies this input order: FSBL, PMU firmware, TF-A, device tree and U-Boot. Its PMU firmware uses the special `pmufw_image` boot-header path; the device tree has `load=0x100000`. TF-A uses `exception_level=el-3` and `trustzone`; U-Boot uses `exception_level=el-2`. The five inputs are not five ordinary image headers.
 
 | Attribute | Meaning |
 | --- | --- |

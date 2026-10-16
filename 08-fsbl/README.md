@@ -6,7 +6,7 @@ The ZynqMP FSBL from embeddedsw xilinx_v2024.1: source walkthrough, build flows,
 
 **Prerequisites:** [06 · Boot Sequence](../06-boot-sequence/README.md) · [07 · Boot Images, BIF and Bootgen](../07-boot-images-and-bootgen/README.md)
 
-All sections contain written material. Source and artifact checks are recorded in the text. Target-specific tests marked **Not run on the reference setup** remain open.
+All five sections now include source-level control flow, a worked ELF memory analysis, recipe integration and failure diagnosis. This depth revision is based on pinned 2024.1 sources and host artifact inspection. Physical-board rebuild, restart and fault-injection tests remain open.
 
 ## Sections
 

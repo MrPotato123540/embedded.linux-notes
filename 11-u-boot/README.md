@@ -6,7 +6,7 @@ U-Boot on ZynqMP: essential commands, environment, boot.scr and uEnv.txt, FIT im
 
 **Prerequisites:** [06 · Boot Sequence](../06-boot-sequence/README.md)
 
-All sections contain written material. Source and artifact checks are recorded in the text. Target-specific tests marked **Not run on the reference setup** remain open.
+All six sections now explain relocation, observed network failures and transfers, script generation, FIT selection and verification, kernel handoff and customization. Physical storage, persistent-environment and custom-build tests remain open.
 
 ## Sections
 

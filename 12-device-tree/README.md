@@ -6,7 +6,7 @@ Describing hardware to software: DTS syntax, bindings, the Xilinx Device Tree Ge
 
 **Prerequisites:** [03 · Zynq UltraScale+ MPSoC Architecture](../03-zynqmp-architecture/README.md)
 
-All sections contain written material. Source and artifact checks are recorded in the text. Target-specific tests marked **Not run on the reference setup** remain open.
+All six sections now follow DTB encoding, driver population/probe, the actual DTG and SDT recipe paths, overlay lifetimes and artifact-to-runtime diagnosis. A synthetic offline overlay merge passed; physical peripheral and live-overlay tests remain open.
 
 ## Sections
 

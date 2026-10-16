@@ -6,7 +6,7 @@ TF-A (formerly ATF) on ZynqMP: the EL3 runtime that provides PSCI, forwards plat
 
 **Prerequisites:** [03 · Zynq UltraScale+ MPSoC Architecture](../03-zynqmp-architecture/README.md) · [06 · Boot Sequence](../06-boot-sequence/README.md)
 
-All sections contain written material. Source and artifact checks are recorded in the text. Target-specific tests marked **Not run on the reference setup** remain open.
+All four sections now cover source-level handoff, runtime services, measured BL31 sections, build-dependent placement and OP-TEE call lifetimes. No new Secure payload, relocated firmware or physical isolation test is claimed.
 
 ## Sections
 
