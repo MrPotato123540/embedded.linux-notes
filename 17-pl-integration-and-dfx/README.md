@@ -6,7 +6,7 @@ Using the programmable logic from Linux: hardware handoff, PL peripherals, the F
 
 **Prerequisites:** [03 · Zynq UltraScale+ MPSoC Architecture](../03-zynqmp-architecture/README.md) · [12 · Device Tree](../12-device-tree/README.md) · [14 · Kernel Modules and Device Drivers](../14-kernel-modules-and-drivers/README.md)
 
-All sections contain written material. Source and artifact checks are recorded in the text. Target-specific tests marked **Not run on the reference setup** remain open.
+All six sections now cover hardware/software compatibility, register protocols, the FPGA firmware load path, DFX state transitions, release-pinned dfx-mgr packaging and DMAengine source flow. Physical programming, isolation, DMA and recovery tests remain open. All sections remain **In review**; advanced draft coverage does not close the hardware validation work.
 
 ## Sections
 

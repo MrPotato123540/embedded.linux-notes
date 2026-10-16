@@ -6,7 +6,7 @@ Built-in (static) vs. loadable (dynamic) modules, in-tree vs. out-of-tree, kerne
 
 **Prerequisites:** [12 · Device Tree](../12-device-tree/README.md) · [13 · The Linux Kernel](../13-linux-kernel/README.md)
 
-All sections contain written material. Source and artifact checks are recorded in the text. Target-specific tests marked **Not run on the reference setup** remain open.
+All six sections now include advanced source walkthroughs, Kbuild and package boundaries, resource lifetime, UIO ownership, and DMA ordering/cache analysis. The synthetic PL-ID driver remains a host-compiled teaching example; target build and hardware tests remain open. All sections remain **In review**; advanced draft coverage does not close the hardware validation work.
 
 ## Sections
 

@@ -6,7 +6,7 @@ What a root filesystem is, initrd vs. initramfs, filesystem types (ext4, UBIFS, 
 
 **Prerequisites:** [13 · The Linux Kernel](../13-linux-kernel/README.md)
 
-All sections contain written material. Source and artifact checks are recorded in the text. Target-specific tests marked **Not run on the reference setup** remain open.
+All nine sections now explain root selection, executable loading, early-root handoff, storage durability, package dependencies and init/device/account lifetimes. The supplied rootfs archive, package manifest and AArch64 ELF files were inspected. Modified-image boot and recovery tests remain open. All sections remain **In review**; advanced draft coverage does not close the hardware validation work.
 
 ## Sections
 

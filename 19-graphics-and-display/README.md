@@ -6,7 +6,7 @@ The DisplayPort subsystem, DRM/KMS and the Arm Mali-400 MP2 GPU, from kernel dri
 
 **Prerequisites:** [13 · The Linux Kernel](../13-linux-kernel/README.md) · [14 · Kernel Modules and Device Drivers](../14-kernel-modules-and-drivers/README.md)
 
-All sections contain written material. Source and artifact checks are recorded in the text. Target-specific tests marked **Not run on the reference setup** remain open.
+All three sections now explain DRM object and buffer lifetimes, vendor display probe/bind order, Mali provider/backend coupling and compositor integration. The BSP Weston 10/libmali restriction is documented. Physical display, GPU rendering and UI tests remain open. All sections remain **In review**; advanced draft coverage does not close the hardware validation work.
 
 ## Sections
 

@@ -6,7 +6,7 @@ The Xilinx Runtime on embedded platforms: zocl, xclbin, Vitis acceleration platf
 
 **Prerequisites:** [17 · PL Integration, FPGA Manager and DFX](../17-pl-integration-and-dfx/README.md)
 
-All sections contain written material. Source and artifact checks are recorded in the text. Target-specific tests marked **Not run on the reference setup** remain open.
+All four sections now explain release-pinned XRT objects, platform compatibility, buffer synchronization and run completion, including the 2024.1 wait-timeout limitation. Vitis AI compatibility and tensor/inference boundaries are documented. Accelerator and inference execution remain untested here. All sections remain **In review**; advanced draft coverage does not close the hardware validation work.
 
 ## Sections
 

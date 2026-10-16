@@ -21,7 +21,65 @@ For a driver needed to mount root, prefer built-in support or include it in the 
 > [!NOTE]
 > **Not run on the reference setup:** creation, autoload and rollback of a new module package.
 
+## Trace the complete delivery path
+
+An external driver passes through several independent steps: recipe discovery, source compilation, package creation, rootfs selection, module dependency generation and device binding. A successful component build covers only the early part. A module absent from the final rootfs cannot be repaired by changing its probe function.
+
+PetaLinux 2024.1 uses the `modules` subcommand of `petalinux-create`; the installed help was inspected for this release. The generated recipe belongs under `project-spec/meta-user/recipes-modules/`. Keep maintained source and recipe changes there or in another versioned layer. Files under temporary build work directories are outputs and can disappear on rebuild.
+
+The template is a starting point, not a complete device integration. It can provide a module recipe and Makefile, but it cannot invent the peripheral's register contract, compatible string, DMA behavior or interrupt acknowledgment rules.
+
+## Understand package splitting
+
+The local `module.bbclass` inherits `kernel-module-split`. The compile step produces objects; the install step places them under a staged kernel-release directory; packaging then creates the module packages and metadata. The recipe's main package can be empty and depend on the split module packages.
+
+This makes three names relevant: the recipe name, the generated package name and the module name used by the loader. They often look similar but are not interchangeable. If the rootfs selector contains the recipe's package while you search only for a guessed split name, you may draw the wrong conclusion.
+
+Use the built package manifests and image manifest as the evidence chain. First establish that the `.ko` entered a package. Then establish that the package entered the image. Finally establish that the deployed image is the one you inspected. A correct build left on the host does not change an older SD-card rootfs.
+
+## The PL-ID example as an integration exercise
+
+For the synthetic PL-ID design, the module source and Kbuild declaration already exist in this guide. A recipe would fetch those files, inherit the module build class, and install through Kbuild's module installation target. The target kernel must provide the platform, Open Firmware device matching, MMIO and sysfs interfaces used by the source.
+
+The device tree must describe the synthetic resource and compatible string. Hardware must implement the documented identity register and keep its clock/reset conditions valid while bound. A rootfs package selects the software artifact; it does not program the PL or create that register.
+
+A complete release therefore has at least four linked artifacts: kernel, module package, device tree and compatible bitstream. For runtime reconfiguration, add the package manager or supervisor that prevents access during replacement. Record one shared design identifier rather than trusting filenames such as `latest.bit`.
+
+## Automatic loading and probe timing
+
+Device-table aliases allow userspace to choose modules for discovered devices. An explicit boot-time module list is another mechanism. Prefer the normal device discovery model when the hardware naturally belongs to it; an early startup script can load a module before its PL block exists.
+
+Module loading and probing have different timing. A driver can register before a supplier, such as a clock provider, is ready. A probe that returns the appropriate deferred-probe error can be retried when dependencies change. A fixed sleep in a startup script hides the dependency and fails again when boot timing changes.
+
+Do not convert every error into deferred probe. A wrong identity register is not a missing supplier. Retrying a permanent hardware mismatch creates noise and delays diagnosis. Report the actual failing resource or contract check.
+
+## Kernel changes can invalidate old module artifacts
+
+A kernel rebuild can change symbol versions, configuration or the release directory. Rebuilding only the external module recipe against stale staged data can create a mixed result. Follow task dependencies and inspect which kernel artifacts were used instead of assuming all outputs were refreshed.
+
+The final image should contain one coherent kernel/modules set. Keeping old release directories may be intentional for rollback, but boot policy must select the matching pair. An updater that replaces the kernel first and module packages later creates a window in which optional devices fail to load.
+
+For reproducible deployment, include source revisions, patch sets, kernel configuration and package versions in release records. The SDK version alone is not a complete identity for kernel modules.
+
+## Failure evidence by boundary
+
+| Boundary | Evidence that confirms progress |
+| --- | --- |
+| Recipe to build | Task log names the expected source and kernel build inputs |
+| Build to package | Package contents include the intended `.ko` |
+| Package to rootfs | Image manifest includes the correct package version |
+| Rootfs to booted system | Running kernel release matches its module directory |
+| Loaded driver to hardware | Device is bound and probe completed against the expected design |
+
+If the first four boundaries pass but probe fails, preserve that success evidence and investigate hardware resources. Repeatedly rebuilding the recipe cannot fix a disabled device-tree node or absent bitstream.
+
+> [!NOTE]
+> **Not run on the reference setup:** the complete synthetic-module recipe-to-board flow. The release class and installed CLI help were inspected; physical PL binding was not tested.
+
 ## References
+
+- Inspected `xilinx-zcu106-2024.1:components/yocto/layers/poky/meta/classes-recipe/module.bbclass` and `kernel-module-split.bbclass`.
+- [linux-xlnx@xilinx-v2024.1:drivers/base/dd.c](https://github.com/Xilinx/linux-xlnx/blob/xilinx-v2024.1/drivers/base/dd.c), binding and deferred probe.
 
 - Installed PetaLinux 2024.1 create help
 - Local BSP: `poky/meta/classes-recipe/module.bbclass`, `kernel-module-split.bbclass`

@@ -6,7 +6,7 @@ Cross-compiling, debugging and profiling applications, and integrating them into
 
 **Prerequisites:** [04 · The Yocto Project](../04-yocto-project/README.md) · [05 · PetaLinux 2024.1](../05-petalinux/README.md)
 
-All sections contain written material. Source and artifact checks are recorded in the text. Target-specific tests marked **Not run on the reference setup** remain open.
+All six sections now cover ABI and sysroot boundaries, failure-driven debugging, whole-pipeline performance, service lifetime, native Python dependencies and container/host contracts. Source and artifact checks support the text; new target application and performance tests remain open. All sections remain **In review**; advanced draft coverage does not close the hardware validation work.
 
 ## Sections
 
