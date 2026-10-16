@@ -6,7 +6,7 @@ Glossary, command cheat sheets, a register quick reference and the full list of 
 
 **Prerequisites:** none
 
-All sections contain written material. Source and artifact checks are recorded in the text. Target-specific tests marked **Not run on the reference setup** remain open.
+All four appendices have advanced-depth revisions with contextual definitions, executed artifact checks, register/address interpretation and source-provenance guidance. Register masks were checked against pinned source; no new physical register accesses were performed.
 
 ## Sections
 

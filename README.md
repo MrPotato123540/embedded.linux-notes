@@ -3,7 +3,7 @@
 A source-referenced engineering guide to building, booting, customizing and securing embedded Linux on AMD (formerly Xilinx) **Zynq UltraScale+ MPSoC** devices, anchored to **PetaLinux 2024.1** and the matching AMD open-source repositories.
 
 > [!NOTE]
-> All 180 sections have initial drafts. An advanced-depth revision is in progress: chapters 04–07 have been expanded, while chapters 08–27 and the appendices still need that revision. The [roadmap](ROADMAP.md) tracks depth and validation separately. English stays at B1–B2 level, with technical terms explained in context.
+> All 180 sections have written content. The advanced-depth revision now covers all 158 later sections, from chapter 04 through the appendices, alongside the existing detailed foundation chapters. The [roadmap](ROADMAP.md) records source checks, executed experiments and remaining hardware validation separately. English stays at B1–B2 level, with technical terms explained in context.
 
 ## Why this guide
 

@@ -6,7 +6,7 @@ The root of trust, boot image authentication and encryption, eFUSE/BBRAM, and an
 
 **Prerequisites:** [06 · Boot Sequence](../06-boot-sequence/README.md) · [07 · Boot Images, BIF and Bootgen](../07-boot-images-and-bootgen/README.md) · [25 · Security Fundamentals and Cryptography](../25-security-fundamentals-and-cryptography/README.md)
 
-All sections contain written material. Source and artifact checks are recorded in the text. Target-specific tests marked **Not run on the reference setup** remain open.
+All eight sections have advanced-depth revisions covering hardware policy, handoff trust, RSA verification, encrypted-image structure, provisioning, verified Linux boot and TEE boundaries. Bootgen 2024.1 accepted a signed host fixture and rejected a changed payload. Hardware secure boot, key provisioning and isolation tests remain open.
 
 ## Sections
 

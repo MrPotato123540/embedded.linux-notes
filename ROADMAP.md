@@ -4,9 +4,9 @@ The guide is written in **work packages (WPs)**. Each work package delivers one 
 
 ## Current writing status
 
-All **180 sections** have an initial draft. This is a coverage statement, not a claim that every section has the required technical depth. An advanced-depth revision is in progress after review found that most later drafts were too brief. Work stays directly on **main**, and English remains B1–B2.
+All **180 sections** have written content. The advanced-depth revision has expanded all **158 later sections**, from chapter 04 through the appendices, while retaining the 22 detailed foundation sections. The remaining 118 short sections were expanded in the final parallel writing pass and checked for cross-chapter consistency. Work stays directly on **main**, and English remains B1–B2.
 
-The chapters remain **In review**, not fully hardware-verified. Local checks include the real BSP metadata, Bootgen 2024.1 decoding, FIT inspection, device-tree decompilation, installed PetaLinux help and a certificate-verification experiment. Earlier captured target sessions remain identified as earlier evidence.
+The chapters remain **In review**, not fully hardware-verified. Local checks include real BSP metadata and rootfs/ELF inspection, Bootgen 2024.1 decoding and authentication, FIT inspection, device-tree decompilation and an offline overlay merge, installed PetaLinux help, and cryptography/certificate experiments. Earlier captured target sessions remain identified as earlier evidence.
 
 Open validation includes fresh image builds, physical peripheral tests, update interruption tests, security provisioning and board-specific examples. The text identifies these limits. A custom AXI-Lite teaching driver has a separate synthetic register contract; it is not a driver for an unspecified real board.
 
@@ -14,14 +14,18 @@ Open validation includes fresh image builds, physical peripheral tests, update i
 
 | Scope | Sections | Depth revision |
 | --- | ---: | --- |
-| Chapters 01–03 | 22 | Existing detailed reference chapters; retain and review for consistency |
+| Chapters 01–03 | 22 | Existing detailed reference chapters retained; related claims checked during integration |
 | Chapter 04 · Yocto | 8 | Expanded: task graph, metadata evaluation, layers, packages, workspace and SDK contracts |
 | Chapter 05 · PetaLinux | 11 | Expanded: real project configuration, artifact provenance, customization and hardware-update effects |
 | Chapter 06 · Boot sequence | 15 | Expanded: stage contracts, pinned FSBL/TF-A/Linux source paths, memory lifetimes and diagnosis |
 | Chapter 07 · Bootgen | 6 | Expanded: BIF interpretation, binary structures, executed regeneration and storage boundaries |
-| Chapters 08–27 and appendices | 118 | Depth revision still pending; current short drafts are not accepted as finished advanced sections |
+| Chapters 08–13 | 33 | Expanded: firmware dispatch, memory and handoff contracts, U-Boot/FIT, device-tree resolution and kernel lifecycle |
+| Chapters 14–19 | 34 | Expanded: module/driver lifetime, DMA ownership, rootfs/init, application ABI, DFX/XRT and graphics pipelines |
+| Chapters 20–24 | 30 | Expanded: media buffers, RPU/RPMsg, network paths, storage/update transactions and staged board diagnosis |
+| Chapters 25–27 | 17 | Expanded: threat boundaries, cryptographic acceptance, hardware trust, Linux policy and secure maintenance |
+| Appendices | 4 | Expanded: contextual terminology, executed inspection examples, register semantics and evidence provenance |
 
-This pass has expanded **40 of the 158 later sections**. It has not completed the requested guide-wide revision. Chapter status remains **In review**, including the expanded chapters.
+The guide-wide depth revision covers **158 of 158 later sections**. Each now explains mechanisms, concrete source/artifact examples, failure cases and validation limits. Chapter status remains **In review** because writing completion does not close the target-specific validation work.
 
 New evidence:
 
@@ -30,7 +34,12 @@ New evidence:
 - Inspected the supplied FSBL and BL31 ELF program headers and sections. Explained stored bytes, zero-initialized regions, runtime memory and lifetime-based reuse.
 - Recreated the supplied `BOOT.BIN` with Bootgen 2024.1 from the original five binary inputs and unchanged BIF attributes. Both files are 1,838,720 bytes and have SHA-256 `97363bab9a28ecda6713840aa55986b98b09fd51b016b030224064f04af612ff`.
 - That result verifies packaging reproducibility from supplied binaries. It does not verify a new firmware compilation, PetaLinux wrapper generation, physical boot, flash programming or secure boot.
-- Local links, heading targets, code fences and Git whitespace checks passed after the depth edits. The earlier hardware-validation limits remain in force.
+- Inspected the actual rootfs archive and AArch64 ELF interfaces, including systemd 251.8, Bash and BusyBox. Traced the matching module, XRT, DFX, Mali/Weston and multimedia recipes and pinned implementation paths.
+- Compiled and merged a synthetic device-tree overlay offline. The merged properties read `status=okay` and `label=after`. This verifies the host resolver exercise, not runtime overlay removal or physical device operation.
+- Decoded the Arm64 `Image` header: 24,269,312 stored bytes, `image_size=0x17A0000`, `text_offset=0`, flags `0xA` and magic `0x644D5241`. Explained why its runtime extent exceeds its file extent.
+- Built a single-FSBL RSA-4096 authentication fixture with Bootgen 2024.1 and temporary development keys. Host verification accepted the original (exit 0) and rejected a one-byte payload change (exit 1). Private-key files were removed; no device key storage was programmed. Development boot-header authentication does not establish production eFUSE trust enforcement.
+- Ran the repository's `crypto_boundaries.py` lab: ten positive/negative checks passed for SHA-256, HMAC, AES-GCM and RSA-PSS. It uses ephemeral in-memory keys and does not access files, network or hardware. Its generic RSA example is explicitly separate from ZynqMP's boot certificate format.
+- Final structural checks passed for 211 Markdown files, all 180 numbered sections and 1,987 local file/heading targets. Code-fence and Git whitespace checks passed. The earlier hardware-validation limits remain in force.
 
 ## Validation record — 15 October 2026
 

@@ -6,7 +6,7 @@ Security principles, threat modeling and the cryptography needed to design secur
 
 **Prerequisites:** none
 
-All sections contain written material. Source and artifact checks are recorded in the text. Target-specific tests marked **Not run on the reference setup** remain open.
+All four sections have advanced-depth revisions: threat boundaries, cryptographic acceptance rules, PKI validation and key lifecycle. The host cryptography lab records positive and negative API checks; the certificate example preserves its earlier host evidence.
 
 ## Sections
 

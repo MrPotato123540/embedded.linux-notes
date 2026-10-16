@@ -6,7 +6,7 @@ Hardening the operating system and its network exposure: SSH in depth, firewalls
 
 **Prerequisites:** [01 · Linux Fundamentals](../01-linux-fundamentals/README.md) · [25 · Security Fundamentals and Cryptography](../25-security-fundamentals-and-cryptography/README.md)
 
-All sections contain written material. Source and artifact checks are recorded in the text. Target-specific tests marked **Not run on the reference setup** remain open.
+All five sections have advanced-depth revisions covering service authority, SSH identity and policy, packet paths, secure update transactions and vulnerability response. Release-specific examples use the actual OpenSSH recipe, security flags, CVE/SPDX classes and image manifest. Production policy deployment and negative target tests remain open.
 
 ## Sections
 
