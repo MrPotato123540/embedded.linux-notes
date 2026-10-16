@@ -6,7 +6,7 @@ V4L2, the media controller, media-ctl and v4l2-ctl, GStreamer and the VCU: build
 
 **Prerequisites:** [14 · Kernel Modules and Device Drivers](../14-kernel-modules-and-drivers/README.md) · [17 · PL Integration, FPGA Manager and DFX](../17-pl-integration-and-dfx/README.md)
 
-All sections contain written material. Source and artifact checks are recorded in the text. Target-specific tests marked **Not run on the reference setup** remain open.
+Every section now includes detailed mechanisms, worked examples, release-specific source paths and failure analysis. The English stays at B1–B2 level. Source inspection and existing captures are distinguished from new execution; target-specific tests marked **Not run on the reference setup** remain open.
 
 ## Sections
 

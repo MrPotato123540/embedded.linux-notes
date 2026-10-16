@@ -6,7 +6,7 @@ JTAG, XSDB/XSCT, QEMU, DDR bring-up and a systematic approach to bringing up a c
 
 **Prerequisites:** [06 · Boot Sequence](../06-boot-sequence/README.md)
 
-All sections contain written material. Source and artifact checks are recorded in the text. Target-specific tests marked **Not run on the reference setup** remain open.
+Every section now includes detailed mechanisms, worked examples, release-specific source paths and failure analysis. The English stays at B1–B2 level. Source inspection and existing captures are distinguished from new execution; target-specific tests marked **Not run on the reference setup** remain open.
 
 ## Sections
 
